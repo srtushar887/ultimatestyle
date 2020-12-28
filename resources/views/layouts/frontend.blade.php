@@ -43,29 +43,25 @@
 <header class="header-style-1">
 
     <!-- ============================================== TOP MENU ============================================== -->
-    <div class="top">
+    <div class="top" style="background-color: {{$gn->top_header_background_color}}">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="row" >
+                <div class="col-md-4 col-sm-4 col-xs-12" >
                     <div class="left">
                         <ul>
-                            <li><i class="fa fa-phone"></i> 123-456-7878</li>
-                            <li><i class="fa fa-envelope-o"></i> info@yourwebsite.com</li>
+                            <li style="color: white"><i class="fa fa-phone" style="color: white"></i> 1{{$gn->site_phone}}</li>
+                            <li style="color: white"><i class="fa fa-envelope-o" style="color: white"></i> {{$gn->site_email}}</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 single-top-item text-center">
+                <div class="col-md-4 col-sm-4 col-xs-12 single-top-item text-center" style="color: white">
                     <h5>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h5>
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook" style="color: white"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -101,7 +97,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 logo">
-                    <a href="home.html"><img src="{{asset('assets/front/')}}/images/logo.png" alt="logo image"></a>
+                    <a href="{{route('front')}}"><img src="{{asset('assets/front/')}}/images/logo.png" alt="logo image"></a>
                 </div>
 
                 <div class="col-md-5 right">
@@ -159,20 +155,20 @@
                     $menu_top_cats = \App\top_level_category::all()
                     ?>
                     @foreach($menu_top_cats as $menu_topcat)
-                    <li><a href="category.html">{{$menu_topcat->top_cat_name}} <span class="caret"></span></a>
+                    <li><a href="{{route('main.category.products',$menu_topcat->id)}}">{{$menu_topcat->top_cat_name}} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php
                                 $menu_mid_cats = \App\mid_level_category::where('top_cat_id',$menu_topcat->id)->get();
 
                             ?>
                             @foreach($menu_mid_cats as $menu_midcat)
-                            <li><a href="category.html">{{$menu_midcat->mid_cat_name}} <span class="caret"></span></a>
+                            <li><a href="{{route('mid.category.products',$menu_midcat->id)}}">{{$menu_midcat->mid_cat_name}} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php
                                     $menu_end_cats = \App\end_level_category::where('mid_cat_id',$menu_midcat->id)->get()
                                     ?>
                                     @foreach($menu_end_cats as $menu_endcats)
-                                    <li><a href="#">{{$menu_endcats->end_cat_name}}</a></li>
+                                    <li><a href="{{route('end.category.products',$menu_endcats->id)}}">{{$menu_endcats->end_cat_name}}</a></li>
                                         @endforeach
 
                                 </ul>

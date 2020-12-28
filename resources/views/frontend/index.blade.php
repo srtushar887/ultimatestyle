@@ -101,7 +101,7 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a href="{{route('product.endategory',$lproduct->product_end_cat_id)}}"><img src="{{asset($lproduct->main_image)}}" style="height: 240px;" alt=""></a> </div>
+                                                        <div class="image"> <a href="{{route('product.details',$lproduct->id)}}"><img src="{{asset($lproduct->main_image)}}" style="height: 240px;" alt=""></a> </div>
                                                         <!-- /.image -->
 
                                                     </div>
@@ -126,7 +126,7 @@
                                                             @endif
 
                                                             <br>
-                                                            <a href="{{route('product.endategory',$lproduct->product_end_cat_id)}}">
+                                                            <a href="{{route('product.details',$lproduct->id)}}">
 
                                                                 <button class="btn btn-primary btn-block " type="button"><i class="fa fa-eye"></i> View Details</button>
                                                             </a>
@@ -275,14 +275,14 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="{{route('product.endategory',$cproduct->product_end_cat_id)}}"><img src="{{asset($cproduct->main_image)}}" style="height: 240px;" alt=""></a> </div>
+                                                            <div class="image"> <a href="{{route('product.details',$cproduct->id)}}"><img src="{{asset($cproduct->main_image)}}" style="height: 240px;" alt=""></a> </div>
                                                             <!-- /.image -->
 
                                                         </div>
                                                         <!-- /.product-image -->
 
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="{{route('product.endategory',$cproduct->product_end_cat_id)}}">{{substr($cproduct->product_name,0,30)}}......</a></h3>
+                                                            <h3 class="name"><a href="{{route('product.details',$cproduct->id)}}">{{substr($cproduct->product_name,0,30)}}......</a></h3>
                                                             <div class="rating rateit-small">
                                                                 <div class="rating">
                                                                     <span class="glyphicon glyphicon-star"></span>
@@ -300,7 +300,7 @@
                                                                 @endif
 
                                                                 <br>
-                                                                <a href="{{route('product.endategory',$cproduct->product_end_cat_id)}}">
+                                                                <a href="{{route('product.details',$cproduct->id)}}">
 
                                                                     <button class="btn btn-primary btn-block " type="button"><i class="fa fa-eye"></i> View Details</button>
                                                                 </a>
@@ -362,113 +362,36 @@
                         <h3 class="section-title">latest form blog</h3>
                         <div class="blog-slider-container outer-top-xs">
                             <div class="owl-carousel blog-slider custom-carousel">
-                                <div class="item">
-                                    <div class="blog-post">
-                                        <div class="blog-post-image">
-                                            <div class="image"> <a href="blog.html"><img src="{{asset('assets/front/')}}/images/blog-post/post1.jpg" alt=""></a>
+                                @foreach($latest_blog as $blog)
+                                    <?php
+
+                                    $date = \Carbon\Carbon::now();
+                                    $times = strtotime($blog->created_at)
+                                    ?>
+                                        <div class="item">
+                                            <div class="blog-post">
+                                                <div class="blog-post-image">
+                                                    <div class="image"> <a href="blog.html"><img src="{{asset($blog->blog_image)}}" style="height: 200px;" alt=""></a> </div>
+                                                </div>
+                                                <!-- /.blog-post-image -->
+
+                                                <div class="blog-post-info text-left">
+                                                    <h3 class="name"><a href="#">{{$blog->blog_title}}</a></h3>
+                                                    <span class="info">By Admin &nbsp;|&nbsp; {{date('F j, Y, g:i a',$times )}} </span>
+                                                    <p class="text">{!! substr($blog->blog_des,0,300) !!}......</p>
+                                                    <a href="#" class="lnk btn btn-primary">Read more</a> </div>
+                                                <!-- /.blog-post-info -->
+
                                             </div>
+                                            <!-- /.blog-post -->
                                         </div>
-                                        <!-- /.blog-post-image -->
-
-                                        <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">Voluptatem accusantium doloremque laudantium</a></h3>
-                                            <span class="info">By Jone Doe &nbsp;|&nbsp; 21 March 2016 </span>
-                                            <p class="text">Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-                                                quaerat voluptatem.</p>
-                                            <a href="blog-details.html" class="lnk btn btn-primary">Read more</a>
-                                        </div>
-                                        <!-- /.blog-post-info -->
-                                    </div>
-                                    <!-- /.blog-post -->
-                                </div>
+                            @endforeach
                                 <!-- /.item -->
 
-                                <div class="item">
-                                    <div class="blog-post">
-                                        <div class="blog-post-image">
-                                            <div class="image"> <a href="blog.html"><img src="{{asset('assets/front/')}}/images/blog-post/post2.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <!-- /.blog-post-image -->
 
-                                        <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                                            <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                            <p class="text">Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-                                                quaerat voluptatem.</p>
-                                            <a href="blog-details.html" class="lnk btn btn-primary">Read more</a>
-                                        </div>
-                                        <!-- /.blog-post-info -->
-
-                                    </div>
-                                    <!-- /.blog-post -->
-                                </div>
                                 <!-- /.item -->
 
                                 <!-- /.item -->
-
-                                <div class="item">
-                                    <div class="blog-post">
-                                        <div class="blog-post-image">
-                                            <div class="image"> <a href="blog.html"><img src="{{asset('assets/front/')}}/images/blog-post/post1.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <!-- /.blog-post-image -->
-                                        <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                                            <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                            <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                                            <a href="#" class="lnk btn btn-primary">Read more</a>
-                                        </div>
-                                        <!-- /.blog-post-info -->
-
-                                    </div>
-                                    <!-- /.blog-post -->
-                                </div>
-                                <!-- /.item -->
-
-                                <div class="item">
-                                    <div class="blog-post">
-                                        <div class="blog-post-image">
-                                            <div class="image"> <a href="blog.html"><img src="{{asset('assets/front/')}}/images/blog-post/post2.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <!-- /.blog-post-image -->
-
-                                        <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                                            <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                            <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                                            <a href="blog-details.html" class="lnk btn btn-primary">Read more</a>
-                                        </div>
-                                        <!-- /.blog-post-info -->
-
-                                    </div>
-                                    <!-- /.blog-post -->
-                                </div>
-                                <!-- /.item -->
-
-                                <div class="item">
-                                    <div class="blog-post">
-                                        <div class="blog-post-image">
-                                            <div class="image"> <a href="blog.html"><img src="{{asset('assets/front/')}}/images/blog-post/post1.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <!-- /.blog-post-image -->
-
-                                        <div class="blog-post-info text-left">
-                                            <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                                            <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                            <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
-                                            <a href="blog-details.html" class="lnk btn btn-primary">Read more</a>
-                                        </div>
-                                        <!-- /.blog-post-info -->
-
-                                    </div>
-                                    <!-- /.blog-post -->
-                                </div>
-                                <!-- /.item -->
-
                             </div>
                             <!-- /.owl-carousel -->
                         </div>
