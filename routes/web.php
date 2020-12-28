@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontendController@index')->name('front');
 Route::get('/all-products', 'FrontendController@all_products')->name('all.products');
+
+
 Route::get('/main-category/{id}', 'FrontendController@main_category_products')->name('main.category.products');
 Route::get('/middle-category/{id}', 'FrontendController@middle_category_products')->name('mid.category.products');
 Route::get('/end-category/{id}', 'FrontendController@end_category_products')->name('end.category.products');
+Route::get('/product-endcategory/{id}', 'FrontendController@product_end_category')->name('product.endategory');
+
+
+
 Route::get('/about-us', 'FrontendController@about_us')->name('about.us');
 Route::get('/blogs', 'FrontendController@blogs')->name('blogs');
 Route::get('/blog-details/{id}', 'FrontendController@blog_details')->name('blog.details');

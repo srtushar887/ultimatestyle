@@ -130,119 +130,13 @@
     <div class="body-content outer-top-xs">
         <div class='container' style="width: 100%">
             <div class='row'>
-                <div class='col-md-3 sidebar'>
-                    <!-- ================================== TOP NAVIGATION ================================== -->
 
-                    <!-- /.side-menu -->
-                    <!-- ================================== TOP NAVIGATION : END ================================== -->
-                    <div class="sidebar-module-container">
-                        <div class="sidebar-filter">
-                            <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
-
-                            <!-- /.sidebar-widget -->
-                            <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
-                            <!-- ============================================== PRICE SILDER============================================== -->
-
-                            <!-- /.sidebar-widget -->
-                            <!-- ============================================== PRICE SILDER : END ============================================== -->
-                            <!-- ============================================== MANUFACTURES============================================== -->
-                            <div class="sidebar-widget wow fadeInUp">
-                                <div class="widget-header">
-                                    <h4 class="widget-title">Top Category</h4>
-                                </div>
-                                <div class="sidebar-widget-body" style="height: 333px;overflow: scroll;">
-                                    @foreach($top_cats as $tcat)
-                                        <div class="checkbox" style="margin-left: 20px;">
-                                            <input type="radio" class="common_selector main_category" id="attribute_1_value_{{$tcat->id}}" {{$cat_id == $tcat->id ? 'checked' : ''}} name="maincategory" value="{{$tcat->id}}">
-                                            <label for="attribute_1_value_{{$tcat->id}}">{{$tcat->top_cat_name}}</label>
-                                        </div>
-                                @endforeach
-                                <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
-                                </div>
-                                <!-- /.sidebar-widget-body -->
-                            </div>
-
-                            <div class="sidebar-widget wow fadeInUp outer-top-vs animated" style="visibility: visible; animation-name: fadeInUp;">
-                                <h3 class="section-title">Sub Category</h3>
-                                <div class="sidebar-widget-body">
-                                    <div class="compare-report subcatdata" style="height: 333px;overflow: scroll;">
-                                        @foreach($mid_cats as $mcat)
-                                            <div class="checkbox" style="margin-left: 20px;">
-                                                <input type="radio" class="common_selector mid_category" id="attribute_2_value_{{$mcat->id}}" name="midcategory" value="{{$mcat->id}}">
-                                                <label for="attribute_2_value_{{$mcat->id}}">{{$mcat->mid_cat_name}}</label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <!-- /.compare-report -->
-                                </div>
-                                <!-- /.sidebar-widget-body -->
-                            </div>
-
-                            <div class="sidebar-widget wow fadeInUp outer-top-vs animated" style="visibility: visible; animation-name: fadeInUp;">
-                                <h3 class="section-title">Sub-sub category</h3>
-                                <div class="sidebar-widget-body">
-                                    <div class="compare-report subsubcatdata" style="height: 333px;overflow: scroll;">
-                                        @foreach($end_cats as $ecat)
-                                            <div class="checkbox" style="margin-left: 20px;">
-                                                <input type="radio" class="common_selector end_category" id="attribute_3_value_{{$ecat->id}}" name="endcategory" value="{{$ecat->id}}">
-                                                <label for="attribute_3_value_{{$ecat->id}}">{{$ecat->end_cat_name}}</label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <!-- /.compare-report -->
-                                </div>
-                                <!-- /.sidebar-widget-body -->
-                            </div>
-
-                            <div class="sidebar-widget wow fadeInUp outer-top-vs animated" style="visibility: visible; animation-name: fadeInUp;">
-                                <h3 class="section-title">Brands</h3>
-                                <div class="sidebar-widget-body">
-                                    <div class="compare-report" style="height: 333px;overflow: scroll;">
-                                        @foreach($brands as $brnd)
-                                            <div class="checkbox" style="margin-left: 20px;">
-                                                <input type="radio" class="common_selector brands" id="attribute_4_value_{{$brnd->id}}" name="brand" value="{{$brnd->id}}">
-                                                <label for="attribute_4_value_{{$brnd->id}}">{{$brnd->brand_name}}</label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <!-- /.compare-report -->
-                                </div>
-                                <!-- /.sidebar-widget-body -->
-                            </div>
-
-
-                            <!-- /.sidebar-widget -->
-                            <!-- ============================================== MANUFACTURES: END ============================================== -->
-                            <!-- ============================================== COLOR============================================== -->
-                            <!-- /.sidebar-widget -->
-                            <!-- ============================================== COLOR: END ============================================== -->
-                            <!-- ============================================== COMPARE============================================== -->
-
-                            <!-- /.sidebar-widget -->
-                            <!-- ============================================== COMPARE: END ============================================== -->
-                            <!-- ============================================== PRODUCT TAGS ============================================== -->
-
-                            <!-- /.sidebar-widget -->
-                            <!----------- Testimonials------------->
-
-                            <!-- ============================================== Testimonials: END ============================================== -->
-                            @if ($static_data->add_two_status == 1)
-                                <a href="{{$static_data->add_two_link}}" target="_blank">
-                                    <div class="home-banner"> <img src="{{asset($static_data->add_image_two)}}" alt="Image"> </div>
-                                </a>
-
-                            @endif
-                        </div>
-                        <!-- /.sidebar-filter -->
-                    </div>
-                    <!-- /.sidebar-module-container -->
-                </div>
                 <!-- /.sidebar -->
-                <div class='col-md-9'>
+                <div class='col-md-12'>
                     <!-- ========================================== SECTION – HERO ========================================= -->
                     <input class="form-control search" placeholder="Search Here">
                     <br>
-                    <div class="clearfix filters-container m-t-10" style="margin-top: -2px;">
+                    <div class="clearfix filters-container " style="margin-top: -10px;">
                         <div class="row">
                             <div class="col col-sm-6 col-md-5">
                                 <div class="filter-tabs">
@@ -263,13 +157,9 @@
                     </div>
                     <div class="search-result-container ">
                         <div id="myTabContent" class="tab-content category-list ">
-                            <div class="tab-pane active " id="grid-container ">
-                                <div class="products">
+                            <div class="products" style="margin-top: -10px;">
 
-                                    {{--                                    @include('frontend.include.allProduct')--}}
-                                </div>
-
-                                <!-- /.category-product -->
+                                {{--                                    @include('frontend.include.allProduct')--}}
                             </div>
                             <!-- /.tab-pane -->
 
