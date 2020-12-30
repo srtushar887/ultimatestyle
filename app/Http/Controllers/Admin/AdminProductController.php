@@ -196,7 +196,7 @@ class AdminProductController extends Controller
             @unlink($update_product->main_image);
             $image = $request->file('main_image');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl1  = $directory.$imageName;
             Image::make($image)->resize(500,500)->save($imgUrl1);
             $update_product->main_image = $imgUrl1;
@@ -206,7 +206,7 @@ class AdminProductController extends Controller
             @unlink($update_product->image_one);
             $image = $request->file('image_one');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl2  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl2);
             $update_product->image_one = $imgUrl2;
@@ -216,7 +216,7 @@ class AdminProductController extends Controller
             @unlink($update_product->image_two);
             $image = $request->file('image_two');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl3  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl3);
             $update_product->image_two = $imgUrl3;
@@ -226,7 +226,7 @@ class AdminProductController extends Controller
             @unlink($update_product->image_three);
             $image = $request->file('image_three');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl4  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl4);
             $update_product->image_three = $imgUrl4;
@@ -236,7 +236,7 @@ class AdminProductController extends Controller
             @unlink($update_product->image_four);
             $image = $request->file('image_four');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl5  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl5);
             $update_product->image_four = $imgUrl5;
@@ -246,7 +246,7 @@ class AdminProductController extends Controller
             @unlink($update_product->image_five);
             $image = $request->file('image_five');
             $imageName = uniqid().time().'.'."jpg";
-            $directory = 'assets/admin/images/products/';
+            $directory = 'assets/admin/images/product/';
             $imgUrl6  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl6);
             $update_product->image_five = $imgUrl6;
