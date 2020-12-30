@@ -48,7 +48,7 @@ class FrontendController extends Controller
 
     public function main_category_products($id)
     {
-        $products = product::where('is_publish', 1)->orderBy('id', 'desc')->paginate(8);
+        $products = product::where('product_top_cat_id',$id)->where('is_publish',1)->orderBy('id', 'desc')->paginate(12);
         $top_cats = top_level_category::all();
         $mid_cats = mid_level_category::all();
         $end_cats = end_level_category::all();
@@ -60,7 +60,7 @@ class FrontendController extends Controller
 
     public function middle_category_products($id)
     {
-        $products = product::where('is_publish', 1)->orderBy('id', 'desc')->paginate(8);
+        $products = product::where('product_mid_cat_id',$id)->where('is_publish', 1)->orderBy('id', 'desc')->paginate(12);
         $top_cats = top_level_category::all();
         $mid_cats = mid_level_category::all();
         $end_cats = end_level_category::all();
@@ -73,8 +73,7 @@ class FrontendController extends Controller
     public function end_category_products($id)
     {
 
-
-        $products = product::where('is_publish', 1)->orderBy('id', 'desc')->paginate(8);
+        $products = product::where('product_end_cat_id',$id)->where('is_publish', 1)->orderBy('id', 'desc')->paginate(12);
         $top_cats = top_level_category::all();
         $mid_cats = mid_level_category::all();
         $end_cats = end_level_category::all();
@@ -84,7 +83,11 @@ class FrontendController extends Controller
         return view('frontend.endCategoryProducts', compact('products', 'top_cats', 'mid_cats', 'end_cats', 'brands','cat_id','static_data'));
     }
 
-
+    public function product_end_category($id)
+    {
+        $products = product::where('product_end_cat_id',$id)->paginate(16);
+        return view('frontend.productEndCategory',compact('products'));
+    }
 
 
     public function about_us()
