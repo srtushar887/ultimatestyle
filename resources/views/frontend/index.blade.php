@@ -88,7 +88,7 @@
                         <div class="more-info-tab clearfix ">
                             <h3 class="new-product-title pull-left">Lastest Products</h3>
                             <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
-                                <li class="active"><a href="#all" >All</a></li>
+                                <li class="active"></li>
                             </ul>
                             <!-- /.nav-tabs -->
                         </div>
@@ -101,7 +101,9 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a href="{{route('product.details',$lproduct->id)}}"><img src="{{asset($lproduct->main_image)}}" style="height: 240px;" alt=""></a> </div>
+                                                        <div class="image"> <a href="{{route('product.details',$lproduct->id)}}">
+                                                                <img src="{{asset($lproduct->main_image)}}" style="height: 300px;" alt="">
+                                                            </a> </div>
                                                         <!-- /.image -->
 
                                                     </div>

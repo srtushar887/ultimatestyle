@@ -71,23 +71,23 @@
     <!-- /.header-top -->
     <!-- ============================================== TOP MENU : END ============================================== -->
     <!-- marquee section start -->
+    <?php
+    $st_data = \App\static_section::first();
+
+    ?>
+    @if ($st_data->header_not_status == 1)
     <section class="marquee-sec">
         <div class="container">
             <div>
-                <marquee class="marquee-sec-inner">
-                    <p>Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                        of
-                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum</p>
+                <marquee class="marquee-sec-inner" style="margin-top: -5px;">
+                    <p>{!! $st_data->header_not !!}</p>
                 </marquee>
             </div>
             <!-- /.header-top-inner -->
         </div>
         <!-- /.container -->
     </section>
+    @endif
 
     <!-- marquee section end -->
     <!-- Header top Start -->

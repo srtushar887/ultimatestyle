@@ -18,7 +18,7 @@
 
 
     <div class="body-content outer-top-xs">
-        <div class="container">
+        <div class="container" style="width: 100%">
             <div class="row">
                 <div class="col-md-3 sidebar">
                     <!-- ================================== TOP NAVIGATION ================================== -->
@@ -101,7 +101,9 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a href="{{route('product.endategory',$pro->product_end_cat_id)}}"><img src="{{asset($pro->main_image)}}" style="height: 240px;" alt=""></a>
+                                                        <div class="image"> <a href="{{route('product.endategory',$pro->product_end_cat_id)}}">
+                                                                <img src="{{asset($pro->main_image)}}" style="height: 400px;" alt="">
+                                                            </a>
                                                         </div>
                                                         <!-- /.image -->
                                                     </div>
