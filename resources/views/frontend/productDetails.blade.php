@@ -10,39 +10,9 @@
     <div class="body-content outer-top-xs">
         <div class='container' style="width: 100%">
             <div class='row single-product'>
-                <div class='col-md-3 sidebar'>
-                    <div class="sidebar-module-container">
-                        @if ($static_data->add_two_status == 1)
-                            <a href="{{$static_data->add_two_link}}" target="_blank">
-                        <div class="home-banner outer-top-n">
-                            <img src="{{asset($static_data->add_image_two)}}" alt="Image">
-                        </div>
-                            </a>
-                    @endif
 
-                        <!-- ============================================== NEWSLETTER ============================================== -->
-                            <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
-                                <h3 class="section-title">Newsletters</h3>
-                                <div class="sidebar-widget-body outer-top-xs">
-                                    <p>Sign Up for Our Newsletter!</p>
-                                    <form>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control newsemail" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                                            <p class="text-danger newserror">Please Enter Your Email</p>
-                                        </div>
-                                        <button class="btn btn-primary" id="newssub">Subscribe</button>
-                                    </form>
-                                </div>
-                                <!-- /.sidebar-widget-body -->
-                            </div>
-                        <!-- /.sidebar-widget -->
-                        <!-- ============================================== NEWSLETTER: END ============================================== -->
-
-                    </div>
-                </div>
                 <!-- /.sidebar -->
-                <div class='col-md-9'>
+                <div class='col-md-12'>
                     <div class="detail-block">
                         <div class="row  wow fadeInUp">
                             <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">

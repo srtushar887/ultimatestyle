@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{asset('assets/front/')}}/css/rateit.css">
     <link rel="stylesheet" href="{{asset('assets/front/')}}/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('assets/front/')}}/css/vendor/responsive.css">
-
+    <link rel="stylesheet" href="{{asset('assets/front/')}}/css/vendor/bug-fixing.css">
 
 
 
@@ -102,17 +102,21 @@
 
                 <div class="col-md-5 right">
                     <ul>
-                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User<span
-                                    class="caret"></span></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fas fa-users-cog"></i>Dashboard</a></li>
-                                <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-                            </ul>
-                        </li>
+                        @guest
 
-                        <li><a href="sign-in.html"><i class="fa fa-sign-in"></i> Login</a></li>
-                        <li><a href="registration.html"><i class="fa fa-user-plus"></i> Register</a></li>
+                            <li><a href="{{route('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
+                        @else
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User<span
+                                        class="caret"></span></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fas fa-users-cog"></i>Dashboard</a></li>
+                                    <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
+
 
                         <li><a href="shopping-cart.html"><i class="fa fa-shopping-cart"></i> View Cart ($0.00)</a></li>
                     </ul>
@@ -136,53 +140,59 @@
     <!-- Navbar fixed top -->
     <section>
         <div class="navbar navbar-default" id="mNavbar" role="navigation">
-            <!-- <div class="container"> -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only ">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="navbar-toggler-icon"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse">
 
-                <!-- Left nav -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{route('front')}}">Home</a></li>
-                    <?php
+                            <!-- Left nav -->
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{route('front')}}">Home</a></li>
+                                <?php
+                                $main_cats = \App\top_level_category::all();
+                                ?>
 
-                    $menu_top_cats = \App\top_level_category::all()
-                    ?>
-                    @foreach($menu_top_cats as $menu_topcat)
-                    <li><a href="{{route('main.category.products',$menu_topcat->id)}}">{{$menu_topcat->top_cat_name}} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <?php
-                                $menu_mid_cats = \App\mid_level_category::where('top_cat_id',$menu_topcat->id)->get();
+                                @foreach($main_cats as $mcats)
+                                    <li><a href="{{route('main.category.products',$mcats->id)}}">{{$mcats->top_cat_name}} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <?php
+                                            $mid_cats = \App\mid_level_category::where('top_cat_id',$mcats->id)->get();
+                                            ?>
+                                            @foreach($mid_cats as $mcats)
+                                                <li><a href="{{route('mid.category.products',$mcats->id)}}">{{$mcats->mid_cat_name}} <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <?php
+                                                        $end_cats = \App\end_level_category::where('mid_cat_id',$mcats->id)->get();
+                                                        ?>
+                                                        @foreach($end_cats as $endcat)
+                                                            <li><a href="{{route('end.category.products',$endcat->id)}}">{{$endcat->end_cat_name	}}</a></li>
+                                                        @endforeach
 
-                            ?>
-                            @foreach($menu_mid_cats as $menu_midcat)
-                            <li><a href="{{route('mid.category.products',$menu_midcat->id)}}">{{$menu_midcat->mid_cat_name}} <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <?php
-                                    $menu_end_cats = \App\end_level_category::where('mid_cat_id',$menu_midcat->id)->get()
-                                    ?>
-                                    @foreach($menu_end_cats as $menu_endcats)
-                                    <li><a href="{{route('end.category.products',$menu_endcats->id)}}">{{$menu_endcats->end_cat_name}}</a></li>
-                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endforeach
 
-                                </ul>
-                            </li>
+
+                                        </ul>
+                                    </li>
                                 @endforeach
+                            </ul>
 
-                        </ul>
-                    </li>
-                    @endforeach
-                </ul>
+                        </div>
+                    </div>
 
+
+                    <!--/.nav-collapse -->
+                </div>
             </div>
-            <!--/.nav-collapse -->
-            <!-- </div> -->
             <!--/.container -->
         </div>
 

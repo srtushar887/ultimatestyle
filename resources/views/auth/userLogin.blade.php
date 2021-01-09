@@ -19,9 +19,7 @@
                 <div class="row">
                     <!-- Sign-in -->
                     <div class="col-md-6 col-sm-6 sign-in col-lg-offset-3">
-                        <div class="sign-in-logo-img">
-                            <img src="http://ultimatestylebd.com/public/assets/frontend/images/5f567c1a91ac2.png" alt=""/>
-                        </div>
+
                         <div class="sign-in-box">
                             <h4 class="">Sign In</h4>
                         @if (Session::has('ac_ac_error'))
@@ -48,15 +46,15 @@
                                     </span>
                                 @enderror
                             </div>
-                            <button type="submit" class="sing-in-btn">Sing In</button>
-                            
+                            <button type="submit" class="sing-in-btn btn-block">Sing In</button>
+
                             <div class="social-sign-in outer-top-xs text-center">
                                 <a href="{{ url('/auth/redirect/facebook') }}" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
                                 <a href="{{ url('/auth/redirect/google') }}" class="twitter-sign-in"><i class="fa fa-google"></i> Sign In with Google</a>
                             </div>
-                            
+
                             <p class="con-priv">By continuing, you agree to The Ultimate Style BD's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a></p>
-                            
+
                             <div class="radio sing-in-fp">
                                 <a href="{{route('forgot.password')}}" class="forgot-password"><i style="margin-right: 3px;" class="fas fa-caret-right"></i> Forgot Password?</a>
                             </div>
@@ -64,7 +62,7 @@
 
                             <p class="text-center" style="margin: 20px 0;">Don't have an account?</p>
                             {{--<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Register</button>--}}
-                            
+
                             <p class="text-center sing-in-cna"><a href="{{route('register')}}"> Create New Account</a></p>
                         </form>
 

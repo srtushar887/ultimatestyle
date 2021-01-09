@@ -97,6 +97,10 @@
                                 <div class="product-slider">
                                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
                                         @foreach($latest_product as $lproduct)
+
+
+
+
                                         <div class="item item-carousel">
                                             <div class="products">
                                                 <div class="product">
@@ -137,18 +141,7 @@
 
                                                     </div>
                                                     <!-- /.product-info -->
-                                                    <div class="cart clearfix animate-effect">
-                                                        <div class="action">
-                                                            <ul class="list-unstyled">
 
-                                                                <li class="lnk wishlist text-center" style="margin: 0 auto;margin-left: 40px;">
-                                                                    <a data-toggle="modal" class="text-center" data-target="#product_view"> <i class="fas fa-eye"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!-- /.action -->
-                                                    </div>
                                                     <!-- /.cart -->
                                                 </div>
                                                 <!-- /.product -->
@@ -156,7 +149,15 @@
                                             </div>
                                             <!-- /.products -->
                                         </div>
+
+
+
+
+
                                     @endforeach
+
+
+
                                         <!-- /.item -->
                                     </div>
                                     <!-- /.home-owl-carousel -->
@@ -311,23 +312,7 @@
 
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
-                                                            <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        <button data-toggle="tooltip" class="btn btn-primary icon" type="button"
-                                                                                title="Add Cart"> <i class="fas fa-cart-plus"></i> </button>
-                                                                        <!-- <button class="btn btn-primary cart-btn" type="button">Add to Cart</button> -->
-                                                                    </li>
 
-                                                                    <li class="lnk wishlist">
-                                                                        <a data-toggle="modal" data-target="#product_view"> <i class="fas fa-eye"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- /.action -->
-                                                        </div>
                                                         <!-- /.cart -->
                                                     </div>
                                                     <!-- /.product -->
@@ -413,80 +398,7 @@
             <!-- /.row -->
             <!-- ============================================== MODAL START============================================== -->
             <!-- Modal start -->
-            <div class="modal fade product_view" id="product_view">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <a href="#" data-dismiss="modal" class="class pull-right"><span
-                                    class="glyphicon glyphicon-remove"></span></a>
-                            <h3 class="modal-title">Popular Floral Product</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6 product_img">
-                                    <img src="{{asset('assets/front/')}}/images/products/p13.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-md-6 product_content">
-                                    <h4>Product Id: <span>51526</span></h4>
-                                    <div class="rating">
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        (10 reviews)
-                                    </div>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                                        the
-                                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                                        type and
-                                        scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting industry.</p>
-                                    <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> 75.00 <small class="pre-cost"><span
-                                                class="glyphicon glyphicon-usd"></span> 60.00</small></h3>
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <select class="form-control" name="select">
-                                                <option value="" selected="">Color</option>
-                                                <option value="black">Black</option>
-                                                <option value="white">White</option>
-                                                <option value="gold">Gold</option>
-                                                <option value="rose gold">Rose Gold</option>
-                                            </select>
-                                        </div>
-                                        <!-- end col -->
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
-                                            <select class="form-control" name="select">
-                                                <option value="">Capacity</option>
-                                                <option value="">16GB</option>
-                                                <option value="">32GB</option>
-                                                <option value="">64GB</option>
-                                                <option value="">128GB</option>
-                                            </select>
-                                        </div>
-                                        <!-- end col -->
-                                        <div class="col-md-4 col-sm-12">
-                                            <select class="form-control" name="select">
-                                                <option value="" selected="">QTY</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                            </select>
-                                        </div>
-                                        <!-- end col -->
-                                    </div>
-                                    <div class="space-ten"></div>
-                                    <div class="btn-ground">
-                                        <button type="button" class="btn btn-primary"><span
-                                                class="glyphicon glyphicon-shopping-cart"></span>
-                                            Add To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- Modal End -->
 
 
