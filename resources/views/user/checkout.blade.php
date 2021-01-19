@@ -43,11 +43,11 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label class="info-title" for="exampleInputEmail1">Full Name <span>*</span></label>
-                                                            <input type="text" name="name" readonly value="{{Auth::user()->name}}" class="form-control name" id="" placeholder="">
+                                                            <input type="text" name="name"  value="{{Auth::user()->name}}" class="form-control name" id="" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-                                                            <input type="email" name="email" readonly value="{{Auth::user()->email}}" class="form-control  email" id="" placeholder="">
+                                                            <input type="email" name="email"  value="{{Auth::user()->email}}" class="form-control  email" id="" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>

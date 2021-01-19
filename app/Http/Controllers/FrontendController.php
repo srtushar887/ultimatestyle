@@ -83,6 +83,22 @@ class FrontendController extends Controller
         return view('frontend.endCategoryProducts', compact('products', 'top_cats', 'mid_cats', 'end_cats', 'brands','cat_id','static_data'));
     }
 
+
+    public function product_search(Request $request)
+    {
+        $search = $request->search;
+        $products = product::where('product_name','LIKE','%'.$search.'%')->paginate(12);
+        $products->appends(['search' => $search]);
+        $top_cats = top_level_category::all();
+        $mid_cats = mid_level_category::all();
+        $end_cats = end_level_category::all();
+        $static_data = static_section::first();
+        return view('frontend.searchProducts', compact('products', 'top_cats', 'mid_cats', 'end_cats','static_data','search'));
+
+    }
+
+
+
     public function product_end_category($id)
     {
         $products = product::where('product_end_cat_id',$id)->paginate(16);

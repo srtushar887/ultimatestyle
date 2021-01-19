@@ -146,7 +146,7 @@
                                 @endif
                                 <input type="file" name="image_two" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 3 (optional)</label>
                                 <br>
                                 @if (!empty($product->image_three) && file_exists($product->image_three))
@@ -156,7 +156,7 @@
                                 @endif
                                 <input type="file" name="image_three" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 4 (optional)</label>
                                 <br>
                                 @if (!empty($product->image_four) && file_exists($product->image_four))
@@ -166,7 +166,7 @@
                                 @endif
                                 <input type="file" name="image_four" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 5 (optional)</label>
                                 <br>
                                 @if (!empty($product->image_five) && file_exists($product->image_five))
@@ -175,6 +175,17 @@
                                     <img src="https://www.chanchao.com.tw/images/default.jpg" style="height: 100px;width: 150px">
                                 @endif
                                 <input type="file" name="image_five" class="form-control" >
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom01">Product Size Image</label>
+                                <br>
+                                @if (!empty($product->product_size_image) && file_exists($product->product_size_image))
+                                    <img src="{{asset($product->product_size_image)}}" style="height: 100px;width: 150px">
+                                @else
+                                    <img src="https://www.chanchao.com.tw/images/default.jpg" style="height: 100px;width: 150px">
+                                @endif
+                                <input type="file" name="product_size_image" class="form-control" >
                             </div>
 
 

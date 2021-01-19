@@ -13,7 +13,9 @@ use App\product_size;
 use App\size;
 use App\top_level_category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminProductController extends Controller
 {
@@ -46,6 +48,19 @@ class AdminProductController extends Controller
         $products = product::orderBy('id','desc')->paginate(15);
         return view('admin.product.productList',compact('products'));
     }
+
+
+    public function product_get(Request $request)
+    {
+        $products = DB::table('products')->get();
+        return DataTables::of($products)
+            ->addColumn('action',function ($products){
+                return ' <a href="'.route('admin.product.edit',$products->id).'"> <button class="btn btn-success btn-info btn-sm"><i class="fas fa-edit"></i> </button></a>
+                        <button id="'.$products->id .'" onclick="productdelete(this.id)" class="btn btn-danger btn-info btn-sm" data-toggle="modal" data-target="#deleteproduct"><i class="far fa-trash-alt"></i> </button>';
+            })
+            ->make(true);
+    }
+
 
     public function product_create(Request $request)
     {
@@ -114,6 +129,15 @@ class AdminProductController extends Controller
             $imgUrl6  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl6);
             $new_product->image_five = $imgUrl6;
+        }
+
+        if($request->hasFile('product_size_image')){
+            $image = $request->file('product_size_image');
+            $imageName = uniqid().time().'.'."jpg";
+            $directory = 'assets/admin/images/product/';
+            $imgUrl6  = $directory.$imageName;
+            Image::make($image)->resize(500,300)->save($imgUrl6);
+            $new_product->product_size_image = $imgUrl6;
         }
 
 
@@ -250,6 +274,16 @@ class AdminProductController extends Controller
             $imgUrl6  = $directory.$imageName;
             Image::make($image)->resize(500,300)->save($imgUrl6);
             $update_product->image_five = $imgUrl6;
+        }
+
+        if($request->hasFile('product_size_image')){
+            @unlink($update_product->product_size_image);
+            $image = $request->file('product_size_image');
+            $imageName = uniqid().time().'.'."jpg";
+            $directory = 'assets/admin/images/product/';
+            $imgUrl6  = $directory.$imageName;
+            Image::make($image)->resize(500,300)->save($imgUrl6);
+            $update_product->product_size_image = $imgUrl6;
         }
 
 

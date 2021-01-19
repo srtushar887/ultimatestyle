@@ -102,17 +102,21 @@
                                 <label for="validationCustom01">Product Image 2 (optional)</label>
                                 <input type="file" name="image_two" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 3 (optional)</label>
                                 <input type="file" name="image_three" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 4 (optional)</label>
                                 <input type="file" name="image_four" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <label for="validationCustom01">Product Image 5 (optional)</label>
                                 <input type="file" name="image_five" class="form-control" >
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom01">Product Size Image</label>
+                                <input type="file" name="product_size_image" class="form-control" >
                             </div>
 
 

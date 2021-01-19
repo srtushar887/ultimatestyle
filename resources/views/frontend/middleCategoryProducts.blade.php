@@ -1,4 +1,15 @@
 @extends('layouts.frontend')
+@section('search')
+    <div class="col-md-3 search-area">
+        <form class="navbar-form navbar-left" role="search" action="{{route('product.search')}}" method="get">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control search-top searchdara" placeholder="Search Product" name="search" >
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+@endsection
 @section('css')
 @stop
 @section('front')
@@ -101,14 +112,14 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="{{route('product.endategory',$pro->product_end_cat_id)}}"><img src="{{asset($pro->main_image)}}" style="height: 400px;" alt=""></a>
+                                                            <div class="image"> <a href="{{route('product.details',$pro->id)}}"><img src="{{asset($pro->main_image)}}" style="height: 400px;" alt=""></a>
                                                             </div>
                                                             <!-- /.image -->
                                                         </div>
                                                         <!-- /.product-image -->
 
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="{{route('product.endategory',$pro->product_end_cat_id)}}">{{substr($pro->product_name,0,30)}}......</a></h3>
+                                                            <h3 class="name"><a href="{{route('product.details',$pro->id)}}">{{substr($pro->product_name,0,30)}}......</a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price">
@@ -118,7 +129,7 @@
                                                                 @endif
 
                                                                 <br>
-                                                                <a href="{{route('product.endategory',$pro->product_end_cat_id)}}">
+                                                                <a href="{{route('product.details',$pro->id)}}">
 
                                                                     <button class="btn btn-primary btn-block " type="button"><i class="fa fa-eye"></i> View Details</button>
                                                                 </a>
@@ -130,10 +141,7 @@
                                                         <!-- /.product-info -->
                                                         <div class="cart clearfix animate-effect">
                                                             <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="lnk wishlist" style="margin: 0 auto;margin-left: 40px;"> <a class="add-to-cart" href="{{route('product.details',$pro->id)}}" title="view"> <i class="fas fa-eye" aria-hidden="true"></i> </a> </li>
 
-                                                                </ul>
                                                             </div>
                                                             <!-- /.action -->
                                                         </div>

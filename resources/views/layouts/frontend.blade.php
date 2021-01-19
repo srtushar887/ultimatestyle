@@ -29,7 +29,16 @@
     <link rel="stylesheet" href="{{asset('assets/front/')}}/css/vendor/bug-fixing.css">
 
 
+    <style>
+        .top-social {
+            margin-top: 11px;
+        }
 
+        .top-social a{
+            color: #fff;
+        }
+
+    </style>
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -60,9 +69,11 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook" style="color: white"></i></a></li>
-                        </ul>
+                        <div class="top-social">
+                            <a href="mailto:name@email.com"><i class="fas fa-envelope"></i> name@email.com</a>
+                            <span style="color: #eee; margin-left: 5px;">|</span>
+                            <a href="#"><i class="fab fa-facebook-square"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,30 +117,35 @@
 
                             <li><a href="{{route('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
                         @else
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User<span
+                            <li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
+                                {{Auth::user()->name}}<span
                                         class="caret"></span></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#"><i class="fas fa-users-cog"></i>Dashboard</a></li>
-                                    <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+                                    <li><a href="{{route('home')}}"><i class="fas fa-users-cog"></i>Dashboard</a></li>
+                                    <li><a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt"></i>Logout</a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
                         @endif
 
+                            <?php
+                            $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+                            $counts = \Gloudemans\Shoppingcart\Facades\Cart::content()->count();
+                            $sub = \Gloudemans\Shoppingcart\Facades\Cart::content()->sum('price');
+                            ?>
 
-
-                        <li><a href="shopping-cart.html"><i class="fa fa-shopping-cart"></i> View Cart ($0.00)</a></li>
+                        <li><a href="{{route('checkout')}}"><i class="fa fa-shopping-cart"></i> View Cart ({{$gn->site_currency}}.{{$sub}})</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 search-area">
-                    <form class="navbar-form navbar-left" role="search" action="#" method="get">
-                        <input type="hidden" name="_csrf" value="14d78ac71a859f402c51f22e4ba85a6d" />
-                        <div class="form-group">
-                            <input type="text" class="form-control search-top" placeholder="Search Product" name="search_text">
-                        </div>
-                        <button type="submit" class="btn btn-default">Search</button>
-                    </form>
-                </div>
+                @yield('search')
             </div>
         </div>
     </div>
@@ -140,7 +156,7 @@
     <!-- Navbar fixed top -->
     <section>
         <div class="navbar navbar-default" id="mNavbar" role="navigation">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="navbar-header">
@@ -173,7 +189,7 @@
                                                         $end_cats = \App\end_level_category::where('mid_cat_id',$mcats->id)->get();
                                                         ?>
                                                         @foreach($end_cats as $endcat)
-                                                            <li><a href="{{route('end.category.products',$endcat->id)}}">{{$endcat->end_cat_name	}}</a></li>
+                                                            <li><a href="{{route('end.category.products',$endcat->id)}}">{{$endcat->end_cat_name    }}</a></li>
                                                         @endforeach
 
                                                     </ul>

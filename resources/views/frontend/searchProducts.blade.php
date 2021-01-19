@@ -4,7 +4,7 @@
         <form class="navbar-form navbar-left" role="search" action="{{route('product.search')}}" method="get">
             @csrf
             <div class="form-group">
-                <input type="text" class="form-control search-top searchdara" placeholder="Search Product" name="search" >
+                <input type="text" class="form-control search-top searchdara" placeholder="Search Product" name="search" value="{{$search}}">
             </div>
             <button type="submit" class="btn btn-default">Search</button>
         </form>
@@ -107,12 +107,15 @@
                             <div class="tab-pane active " id="grid-container">
                                 <div class="category-product">
                                     <div class="row">
+                                        <input type="hidden" class="searchvalue" value="{{$search}}" >
                                         @foreach($products as $pro)
                                             <div class="col-sm-6 col-md-4 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="{{route('product.details',$pro->id)}}"><img src="{{asset($pro->main_image)}}" style="height: 400px;" alt=""></a>
+                                                            <div class="image"> <a href="{{route('product.details',$pro->id)}}">
+                                                                    <img src="{{asset($pro->main_image)}}" style="height: 400px;" alt="">
+                                                                </a>
                                                             </div>
                                                             <!-- /.image -->
                                                         </div>
@@ -141,10 +144,7 @@
                                                         <!-- /.product-info -->
                                                         <div class="cart clearfix animate-effect">
                                                             <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="lnk wishlist" style="margin: 0 auto;margin-left: 40px;"> <a class="add-to-cart" href="{{route('product.details',$pro->id)}}" title="view"> <i class="fas fa-eye" aria-hidden="true"></i> </a> </li>
 
-                                                                </ul>
                                                             </div>
                                                             <!-- /.action -->
                                                         </div>
@@ -197,6 +197,4 @@
     </div>
 
 @stop
-@section('js')
 
-@stop

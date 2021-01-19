@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('css')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+@endsection
 @section('admin')
     <div class="row">
         <div class="col-12">
@@ -28,7 +30,7 @@
                     <h4 class="card-title"></h4>
 
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
+                        <table class="table table-hover mb-0" id="products">
                             <thead>
                             <tr>
                                 <th>Product Image</th>
@@ -38,64 +40,7 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            @foreach($products as $product)
-                                <tr>
-                                    <th scope="row">
-                                        <img src="{{asset($product->main_image)}}" style="height: 50px;width: 80px;">
-                                    </th>
-                                    <td>{{$product->product_name}}</td>
-                                    <td>TK{{$product->current_price}}</td>
-                                    <td>
-                                        @if ($product->is_publish == 1)
-                                            Published
-                                        @elseif($product->is_publish == 2)
-                                            Un-Published
-                                        @else
-                                            Not Set
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.product.edit',$product->id)}}">
-
-                                            <button class="btn btn-success btn-sm"><i class="fas fa-edit"></i> </button>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteproduct{{$product->id}}"><i class="fas fa-trash"></i> </button>
-                                    </td>
-                                </tr>
-
-
-                                <div class="modal fade" id="deleteproduct{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form action="{{route('admin.delete.product')}}" method="post">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        are you sure to delete this product ?
-                                                        <input type="hidden" class="form-control" name="product_delete_id" value="{{$product->id}}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            @endforeach
-                            </tbody>
                         </table>
-                        {{$products->links()}}
                     </div>
                 </div>
                 <!-- end card-body-->
@@ -109,8 +54,114 @@
 
 
 
-
+    <div class="modal fade" id="deleteproduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('admin.delete.product')}}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            are you sure to delete this product ?
+                            <input type="hidden" class="form-control productdelete" name="product_delete_id">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
 @stop
+
+@section('js')
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+
+        function productdelete(id) {
+            $('.productdelete').val(id);
+        }
+        function brandsupdate(id)
+        {
+            var id = id;
+            $.ajax({
+                type : "POST",
+                url : "{{route('admin.brands,single')}}",
+                data : {
+                    '_token' : "{{csrf_token()}}",
+                    'id' : id,
+                },
+                success:function (data) {
+                    $('.brandedit').val(id);
+                    $('.brandname').val(data.brand_name);
+                }
+            });
+        };
+
+
+
+        $(document).ready(function (){
+            $('#products').DataTable({
+                "pageLength": 10,
+                "lengthMenu": [[25, 50,75, -1], [25, 50,75, "All"]],
+                "processing": true,
+                "serverSide": true,
+                "bSort": true,
+                "responsive": true,
+                "language": {
+                    processing: '<div class="loading">Loading&#8230;</div>'
+                },
+                "ajax": {
+                    "type": "POST",
+                    data:{
+                        '_token' : "{{csrf_token()}}",
+                    },
+                    "url": "{{route('admin.get.products')}}",
+                },
+                columns: [
+                    {
+                        data: 'main_image',
+                        render: function(data) {
+                            if(data == null) {
+                                return '<img src="https://dirtbusters.co.uk/images/default/product.png" alt="" img style="width:100px; height:100px">';
+                            }else {
+                                return '<img src="{{url('/')}}/'+data+'" alt="" img style="width:100px; height:100px">';
+                            }
+
+                        },
+                        defaultContent: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0okZSQTV10ebVN9GwLfr45wbCB9tyUK_oFjmRrP9Uo000e9sU" alt="" img style="width:100%; height:100px">'
+                    },
+                    { data: 'product_name', name: 'product_name',class : 'text-left' },
+                    { data: 'current_price', name: 'current_price',class : 'text-left' },
+                    {
+                        data: 'is_publish',
+                        render: function(data) {
+                            if(data == 1) {
+                                return "<span class='label label-info label-mini text-center'>Publish</span>";
+                            }else if (data == 2){
+                                return "<span class='label label-info label-mini text-center'>Unpublish</span>";
+                            }
+                            else {
+                                return "<span class='label label-info label-mini text-center'>Not Set Yet</span>";
+                            }
+
+                        },
+                        defaultContent: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0okZSQTV10ebVN9GwLfr45wbCB9tyUK_oFjmRrP9Uo000e9sU" alt="" img style="width:100%; height:100px">'
+                    },
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ],
+
+            });
+        })
+    </script>
+@endsection

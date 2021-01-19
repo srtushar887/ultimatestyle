@@ -46,5 +46,6 @@ $factory->define(\App\color::class, function (Faker $faker) {
 $factory->define(\App\size::class, function (Faker $faker) {
     return [
         'size_name' => $faker->name,
+        'size_price' => rand(00,50),
     ];
 });

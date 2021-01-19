@@ -7,6 +7,7 @@ use App\color;
 use App\Http\Controllers\Controller;
 use App\size;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminMasterController extends Controller
 {
@@ -16,6 +17,19 @@ class AdminMasterController extends Controller
         return view('admin.masterdata.brand',compact('brands'));
     }
 
+    public function brand_get(Request $request)
+    {
+
+        $brands = brand::get();
+        return DataTables::of($brands)
+            ->addColumn('action',function ($brands){
+                return ' <button id="'.$brands->id .'" onclick="brandsupdate(this.id)" class="btn btn-success btn-info btn-sm" data-toggle="modal" data-target="#updatebrands"><i class="fas fa-edit"></i> </button>
+                        <button id="'.$brands->id .'" onclick="branddelete(this.id)" class="btn btn-danger btn-info btn-sm" data-toggle="modal" data-target="#deletebrand"><i class="far fa-trash-alt"></i> </button>';
+            })
+            ->make(true);
+    }
+
+
     public function brand_save(Request $request)
     {
         $new_brand = new brand();
@@ -24,6 +38,13 @@ class AdminMasterController extends Controller
         return back()->with('success','Brand Successfully Created');
 
     }
+
+    public function brand_single(Request $request)
+    {
+        $brands = brand::where('id',$request->id)->first();
+        return $brands;
+    }
+
 
     public function brand_update(Request $request)
     {
@@ -47,6 +68,18 @@ class AdminMasterController extends Controller
         return view('admin.masterdata.color',compact('colors'));
     }
 
+
+    public function color_get(Request $request)
+    {
+        $colors = color::get();
+        return DataTables::of($colors)
+            ->addColumn('action',function ($colors){
+                return ' <button id="'.$colors->id .'" onclick="colorupdate(this.id)" class="btn btn-success btn-info btn-sm" data-toggle="modal" data-target="#updatecolor"><i class="fas fa-edit"></i> </button>
+                        <button id="'.$colors->id .'" onclick="colordelete(this.id)" class="btn btn-danger btn-info btn-sm" data-toggle="modal" data-target="#deletecolors"><i class="far fa-trash-alt"></i> </button>';
+            })
+            ->make(true);
+    }
+
     public function color_save(Request $request)
     {
         $new_color = new color();
@@ -54,6 +87,12 @@ class AdminMasterController extends Controller
         $new_color->save();
 
         return back()->with('success','Color Successfully Created');
+    }
+
+
+    public function color_single(Request $request){
+        $color_single = color::where('id',$request->id)->first();
+        return $color_single;
     }
 
 
@@ -80,10 +119,23 @@ class AdminMasterController extends Controller
         return view('admin.masterdata.size',compact('sizes'));
     }
 
+    public function size_get(Request $request)
+    {
+        $sized = size::get();
+        return DataTables::of($sized)
+            ->addColumn('action',function ($sized){
+                return ' <button id="'.$sized->id .'" onclick="sizeupdate(this.id)" class="btn btn-success btn-info btn-sm" data-toggle="modal" data-target="#upatesize"><i class="fas fa-edit"></i> </button>
+                        <button id="'.$sized->id .'" onclick="sizedelete(this.id)" class="btn btn-danger btn-info btn-sm" data-toggle="modal" data-target="#deletesize"><i class="far fa-trash-alt"></i> </button>';
+            })
+            ->make(true);
+    }
+
+
     public function size_save(Request $request)
     {
         $new_size = new size();
         $new_size->size_name = $request->size_name;
+        $new_size->size_price = $request->size_price;
         $new_size->save();
 
         return back()->with('success','Size Successfully Created');
@@ -91,10 +143,18 @@ class AdminMasterController extends Controller
     }
 
 
+    public function size_single(Request $request)
+    {
+        $size_single = size::where('id',$request->id)->first();
+        return $size_single;
+    }
+
+
     public function size_update(Request $request)
     {
         $update_size = size::where('id',$request->edit_size)->first();
         $update_size->size_name = $request->size_name;
+        $update_size->size_price = $request->size_price;
         $update_size->save();
 
         return back()->with('success','Size Successfully Updated');

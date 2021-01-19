@@ -1,4 +1,15 @@
 @extends('layouts.frontend')
+@section('search')
+    <div class="col-md-3 search-area">
+        <form class="navbar-form navbar-left" role="search" action="{{route('product.search')}}" method="get">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control search-top searchdara" placeholder="Search Product" name="search" >
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+@endsection
 
 
 @section('css')
@@ -185,7 +196,7 @@
                                 @endif
                                     <!-- /.stock-container -->
                                     <div class="description-container m-t-20">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        {!! $product->sort_des !!}
                                     </div>
 
                                     <form action="{{route('add.to.cart.single')}}" method="post">
@@ -413,14 +424,14 @@
                                         <div class="product">
                                             <div class="product-image">
                                                 <div class="image">
-                                                    <a href="{{route('product.details',$relpro->id)}}"><img  src="{{asset($relpro->main_image)}}" alt=""></a>
+                                                    <a href="{{route('product.details',$relpro->id)}}"><img  src="{{asset($relpro->main_image)}}" style="height: 400px;" alt=""></a>
                                                 </div>
                                                 <!-- /.image -->
 
                                             </div>
                                             <!-- /.product-image -->
                                             <div class="product-info text-left">
-                                                <h3 class="name"><a href="{{route('product.details',$relpro->id)}}">{{$relpro->product_name}}</a></h3>
+                                                <h3 class="name"><a href="{{route('product.details',$relpro->id)}}">{{substr($relpro->product_name,0,30)}}......</a></h3>
                                                 <?php
 
                                                 $rating = \App\product_review::where('product_review_id',$relpro->id)->sum('quality');

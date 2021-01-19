@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'FrontendController@index')->name('front');
 Route::get('/all-products', 'FrontendController@all_products')->name('all.products');
 
+Route::get('/product-search', 'FrontendController@product_search')->name('product.search');
+
 
 Route::get('/main-category/{id}', 'FrontendController@main_category_products')->name('main.category.products');
 Route::get('/middle-category/{id}', 'FrontendController@middle_category_products')->name('mid.category.products');
@@ -102,24 +104,28 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::post('/change-password-save', 'Admin\AdminController@change_password_save')->name('admin.password.update');
 
 
-
-
         //top category
         Route::get('/top-category', 'Admin\AdminCategoryController@top_category')->name('admin.top.category');
+        Route::post('/top-category-get', 'Admin\AdminCategoryController@top_category_get')->name('admin.get.topcat');
         Route::post('/top-category-save', 'Admin\AdminCategoryController@top_category_save')->name('admin.save.topcategory');
+        Route::post('/top-category-single', 'Admin\AdminCategoryController@top_category_single')->name('admin.topcat,single');
         Route::post('/top-category-update', 'Admin\AdminCategoryController@top_category_update')->name('admin.update.topcategory');
         Route::post('/top-category-delete', 'Admin\AdminCategoryController@top_category_delete')->name('admin.delete.topcategory');
 
         //middle category
         Route::get('/middle-category', 'Admin\AdminCategoryController@middle_category')->name('admin.middle.category');
+        Route::post('/middle-category-get', 'Admin\AdminCategoryController@middle_category_get')->name('admin.get.midcat');
         Route::post('/middle-category-save', 'Admin\AdminCategoryController@middle_category_save')->name('admin.save.middlecategory');
+        Route::post('/middle-category-single', 'Admin\AdminCategoryController@middle_category_single')->name('admin.midcat,single');
         Route::post('/middle-category-update', 'Admin\AdminCategoryController@middle_category_update')->name('admin.update.middlecategory');
         Route::post('/middle-category-delete', 'Admin\AdminCategoryController@middle_category_delete')->name('admin.delete.middlecategory');
 
 
         //end category
         Route::get('/end-category', 'Admin\AdminCategoryController@end_category')->name('admin.end.category');
+        Route::post('/end-category-get', 'Admin\AdminCategoryController@end_category_get')->name('admin.get.endcat');
         Route::post('/end-category-save', 'Admin\AdminCategoryController@end_category_save')->name('admin.save.endcategory');
+        Route::post('/end-category-single', 'Admin\AdminCategoryController@end_category_single')->name('admin.endcat,single');
         Route::post('/end-category-update', 'Admin\AdminCategoryController@end_category_update')->name('admin.update.endcategory');
         Route::post('/end-category-delete', 'Admin\AdminCategoryController@end_category_delete')->name('admin.delete.endcategory');
 
@@ -127,27 +133,34 @@ Route::group(['middleware' => ['auth:admin']], function() {
 
         //brand
         Route::get('/brand', 'Admin\AdminMasterController@brand')->name('admin.brand');
+        Route::post('/brand-get', 'Admin\AdminMasterController@brand_get')->name('admin.get.brands');
         Route::post('/brand-save', 'Admin\AdminMasterController@brand_save')->name('admin.save.brand');
+        Route::post('/brand-single', 'Admin\AdminMasterController@brand_single')->name('admin.brands,single');
         Route::post('/brand-update', 'Admin\AdminMasterController@brand_update')->name('admin.update.brand');
         Route::post('/brand-delete', 'Admin\AdminMasterController@brand_delete')->name('admin.delete.brand');
 
 
         //brand
         Route::get('/color', 'Admin\AdminMasterController@color')->name('admin.color');
+        Route::post('/color-get', 'Admin\AdminMasterController@color_get')->name('admin.get.colors');
         Route::post('/color-save', 'Admin\AdminMasterController@color_save')->name('admin.save.color');
         Route::post('/color-update', 'Admin\AdminMasterController@color_update')->name('admin.update.color');
+        Route::post('/color-single', 'Admin\AdminMasterController@color_single')->name('admin.color,single');
         Route::post('/color-delete', 'Admin\AdminMasterController@color_delete')->name('admin.delete.color');
 
 
         //size
         Route::get('/size', 'Admin\AdminMasterController@size')->name('admin.size');
+        Route::post('/size-get', 'Admin\AdminMasterController@size_get')->name('admin.get.sizes');
         Route::post('/size-save', 'Admin\AdminMasterController@size_save')->name('admin.save.size');
+        Route::post('/size-single', 'Admin\AdminMasterController@size_single')->name('admin.size,single');
         Route::post('/size-update', 'Admin\AdminMasterController@size_update')->name('admin.update.size');
         Route::post('/size-delete', 'Admin\AdminMasterController@size_delete')->name('admin.delete.size');
 
 
         //product
         Route::get('/product', 'Admin\AdminProductController@product')->name('admin.product');
+        Route::post('/product-get', 'Admin\AdminProductController@product_get')->name('admin.get.products');
         Route::get('/product-create', 'Admin\AdminProductController@product_create')->name('admin.create.product');
         Route::post('/product-save', 'Admin\AdminProductController@product_save')->name('admin.save.product');
         Route::get('/product-edit/{id}', 'Admin\AdminProductController@product_edit')->name('admin.product.edit');

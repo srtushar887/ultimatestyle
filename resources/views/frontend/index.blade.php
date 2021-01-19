@@ -1,4 +1,15 @@
 @extends('layouts.frontend')
+@section('search')
+    <div class="col-md-3 search-area">
+        <form class="navbar-form navbar-left" role="search" action="{{route('product.search')}}" method="get">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control search-top searchdara" placeholder="Search Product" name="search" >
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+@endsection
 @section('css')
 
 @section('front')
