@@ -44,6 +44,8 @@
                                 <th>Product Size (if have)</th>
                                 <th>Product Qty</th>
                                 <th>Product Price</th>
+                                <th>Delivery Day</th>
+                                <th>Received Type</th>
                                 <th>Subtotal</th>
                             </tr>
                             </thead>
@@ -77,9 +79,17 @@
                                     </td>
                                     <td>{{$gn->site_currency}}{{$product->current_price}}</td>
                                     <td>{{$order_details->qty}}</td>
+                                    <td>{{$product->min_del_date}} - {{$product->max_del_date}} Days</td>
                                     <?php
                                     $total = $product->current_price * $order_details->qty;
                                     ?>
+                                    <td>
+                                        @if(!empty($order_details->coriertype))
+                                            {{$order_details->coriertype}}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td>{{$gn->site_currency}}{{$total}}</td>
                                 </tr>
                             @endforeach

@@ -117,7 +117,7 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <th scope="row">{{$order->user_order_id}}</th>
-                                    <td>${{$order->total_amount}}</td>
+                                    <td>{{$gn->site_currency}}{{$order->total_amount}}</td>
                                     <td>{{$order->created_at}}</td>
                                     <td>
                                         @if ($order->status == 1)

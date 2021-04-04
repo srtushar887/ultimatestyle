@@ -24,6 +24,9 @@ Route::get('/middle-category/{id}', 'FrontendController@middle_category_products
 Route::get('/end-category/{id}', 'FrontendController@end_category_products')->name('end.category.products');
 Route::get('/product-endcategory/{id}', 'FrontendController@product_end_category')->name('product.endategory');
 
+//product size amount get
+Route::post('/product-size-amount-get', 'FrontendController@product_size_amount_get')->name('product.size.amount.get');
+
 
 
 Route::get('/about-us', 'FrontendController@about_us')->name('about.us');
@@ -40,6 +43,8 @@ Route::post('/my-cart-update', 'FrontendController@my_cart_update')->name('mycar
 Route::get('/cart-details', 'FrontendController@cart_details')->name('my.cart');
 Route::get('/privacy-policy', 'FrontendController@privacy_policy')->name('privacy.policy');
 Route::get('/terms-condition', 'FrontendController@terms_condition')->name('terms.condition');
+Route::get('/shipping-policy', 'FrontendController@shipping_policy')->name('shipping.policy');
+Route::get('/return-policy', 'FrontendController@return_policy')->name('return.policy');
 Route::post('/news-latter-save', 'FrontendController@news_later_save')->name('user.newslatter.save');
 Route::post('/contact-us-save', 'FrontendController@contact_us_save')->name('contactus.save');
 Route::post('/product-review-save', 'FrontendController@product_review_save')->name('product.review.save');
@@ -53,6 +58,11 @@ Route::get('/product-filters', 'FrontendFilterController@product_filtes_get');
 Route::post('/product-filters-get-main-cat', 'FrontendFilterController@product_filtes_get_main_cat')->name('get.maincat');
 Route::post('/product-filters-get-sub-cat', 'FrontendFilterController@product_filtes_get_sub_cat')->name('get.subcat');
 Route::post('/product-filters-get-sub-sub-cat', 'FrontendFilterController@product_filtes_get_sub_sub_cat')->name('get.subsubcat');
+
+//view cart
+Route::get('/view-cart', 'FrontendController@view_cart')->name('view.cart');
+Route::get('/cart-item-remove/{id}', 'FrontendController@cart_item_remove')->name('cart.item.remove');
+Route::post('/cart-item-update', 'FrontendController@cart_item_update')->name('cart.item.update');
 
 
 //social login
@@ -69,11 +79,43 @@ Route::post('/forgot-password-reset-save', 'VisitorController@forgot_password_re
 
 //custom register
 Route::post('/user-custom-register', 'CustomLoginController@custom_register')->name('user.custom.register');
+Route::post('/user-custom-login', 'CustomLoginController@custom_login')->name('user.custom.login');
 Route::get('/account-verify-check/{code}', 'CustomLoginController@user_account_verify')->name('user.account.verify.check');
 
 
 
 Auth::routes();
+
+
+
+
+
+
+
+// SSLCOMMERZ Start
+
+Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+
+
+Route::post('/pay', 'SslCommerzPaymentController@index')->name('user.pay.submit');
+Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+
+Route::get('/pay', 'SslCommerzPaymentController@ipn');
+//SSLCOMMERZ END
+
+
+
+
+
+
 
 
 
@@ -270,6 +312,16 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::get('/checkout', 'User\UserController@checkout')->name('checkout');
         Route::post('/payment-confirm', 'User\UserController@payment_confirm')->name('user.payment.confirm');
+
+
+
+
+
+
+
+
+
+
     });
 });
 

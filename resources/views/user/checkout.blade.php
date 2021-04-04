@@ -38,23 +38,29 @@
                                             <!-- guest-login -->
                                             <!-- already-registered-login -->
                                             <div class="col-md-12 col-sm-12 already-registered-login">
-                                                <form class="register-form" role="form" action="{{route('user.payment.confirm')}}" method="post">
+                                                <form method="post" action="{{ route('user.pay.submit') }}">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Full Name <span>*</span></label>
-                                                            <input type="text" name="name"  value="{{Auth::user()->name}}" class="form-control name" id="" placeholder="">
+                                                                <?php
+
+                                                                    $total_am = \Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+                                                            $result = str_replace(',', '', $total_am);
+                                                            ?>
+                                                            <label class="info-title" for="exampleInputEmail1">Full Name </label>
+                                                            <input type="text" name="name"  value="{{Auth::user()->name}}" class="form-control name" id="customer_name" placeholder="">
+                                                            <input type="hidden" name="total_amount"  value="{{$result}}" class="form-control name" id="customer_name" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-                                                            <input type="email" name="email"  value="{{Auth::user()->email}}" class="form-control  email" id="" placeholder="">
+                                                            <label class="info-title" for="exampleInputEmail1">Email Address </label>
+                                                            <input type="email" name="email"  value="{{Auth::user()->email}}" class="form-control  email" id="email" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-                                                            <input type="email" name="phone_number" value="{{Auth::user()->phone_number}}" class="form-control  phone" id="" placeholder="">
+                                                            <input type="text" name="phone_number" value="{{Auth::user()->phone_number}}" class="form-control  phone" id="mobile" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Country <span>*</span></label>
+                                                            <label class="info-title" for="exampleInputEmail1">Country </label>
                                                             <select class="form-control country" name="country">
                                                                 <option value="Afghanistan">Afghanistan</option>
                                                                 <option value="Åland Islands">Åland Islands</option>
@@ -74,7 +80,7 @@
                                                                 <option value="Azerbaijan">Azerbaijan</option>
                                                                 <option value="Bahamas">Bahamas</option>
                                                                 <option value="Bahrain">Bahrain</option>
-                                                                <option value="Bangladesh">Bangladesh</option>
+                                                                <option value="Bangladesh" selected>Bangladesh</option>
                                                                 <option value="Barbados">Barbados</option>
                                                                 <option value="Belarus">Belarus</option>
                                                                 <option value="Belgium">Belgium</option>
@@ -305,28 +311,44 @@
 
                                                         <div class="form-group col-md-12">
                                                             <label class="info-title" for="exampleInputEmail1">Address <span>*</span></label>
-                                                            <textarea name="address" cols="5" rows="5" class="form-control  address" id="" placeholder="">{!! Auth::user()->address !!}</textarea>
+                                                            <textarea name="address" cols="5" rows="5" class="form-control  address" id="address" placeholder="">{!! Auth::user()->address !!}</textarea>
                                                         </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">City <span>*</span></label>
-                                                            <input type="text" name="city" value="{{Auth::user()->city}}" class="form-control  city" id="" placeholder="">
+                                                        <div class="form-group col-md-4">
+                                                            <label class="info-title" for="exampleInputEmail1">City </label>
+                                                            <input type="text" name="city" value="{{Auth::user()->city}}" class="form-control  city" id="city" placeholder="">
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">State<span>*</span></label>
-                                                            <input type="text" name="state" value="{{Auth::user()->state}}" class="form-control  state" id="" placeholder="">
+                                                        <div class="form-group col-md-4">
+                                                            <label class="info-title" for="exampleInputEmail1">State</label>
+                                                            <input type="text" name="state" value="{{Auth::user()->state}}" class="form-control  state" id="state" placeholder="">
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Postal Code <span>*</span></label>
-                                                            <input type="text" name="postal_code" value="{{Auth::user()->postal_code}}" class="form-control  postal" id="" placeholder="">
+                                                        <div class="form-group col-md-4">
+                                                            <label class="info-title" for="exampleInputEmail1">Postal Code </label>
+                                                            <input type="text" name="postal_code" value="{{Auth::user()->postal_code}}" class="form-control  postal" id="posta_code" placeholder="">
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Zip Code <span>*</span></label>
-                                                            <input type="text" name="zip_code" value="{{Auth::user()->zip_code}}" class="form-control  zipcode" id="" placeholder="">
+                                                    </div>
+                                                    <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="modal" data-target="#exampleModalCenter"> Pay Now </button>
+
+
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Accept Condition</h5>
+                                                                </div>
+                                                                <div class="modal-body" style="height: 500px;overflow: scroll;">
+                                                                    {!! $gen->checkout_condition !!}
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
 
+                                                </form>
                                             </div>
                                             <!-- already-registered-login -->
                                         </div>
@@ -362,7 +384,7 @@
                                     </div>
                                     <br>
                                     <h4>Total : {{$gn->site_currency}}{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</h4>
-{{--                                    <input type="hidden" name="total_am"  class="total_amount" value="{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}">--}}
+                                    {{--                                    <input type="hidden" name="total_am"  class="total_amount" value="{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}">--}}
                                 </div>
                             </div>
                         </div>
@@ -374,69 +396,6 @@
 
 
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="panel-group checkout-steps" id="accordion">
-                            <!-- checkout-step-01  -->
-                            <div class="panel panel-default checkout-step-01">
-                                <!-- panel-heading -->
-                                <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">
-                                        <a data-toggle="collapse" class="" >
-                                            <span>2</span>Payment
-                                        </a>
-                                    </h4>
-                                </div>
-                                <!-- panel-heading -->
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <!-- panel-body  -->
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <!-- guest-login -->
-                                            <!-- guest-login -->
-                                            <!-- already-registered-login -->
-                                            <div class="col-md-12 col-sm-12 already-registered-login">
-
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Payment Type<span>*</span></label>
-                                                            <select class="form-control" name="payment_type">
-                                                                <option value="0">select any</option>
-                                                                <option value="Bkash">Bkash</option>
-                                                                <option value="Nagod">Nagod</option>
-                                                                <option value="Bank">Bank</option>
-                                                                <option value="Cash On Delivery">Cash On Delivery</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label class="info-title" for="exampleInputEmail1">Sender Address<span>*</span></label>
-                                                            <input type="text" name="total_amount" class="form-control name" id="" readonly placeholder="" value="{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}">
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <label class="info-title" for="exampleInputEmail1">Sender Address<span>*</span></label>
-                                                            <textarea type="text" name="payment_address" cols="5" rows="5"  class="form-control name" id="" placeholder=""></textarea>
-                                                        </div>
-                                                        <div class="form-group col-md-12">
-                                                            <button class="btn btn-success ">Submit</button>
-                                                        </div>
-
-                                                    </div>
-
-                                                </form>
-                                            </div>
-                                            <!-- already-registered-login -->
-                                        </div>
-                                    </div>
-                                    <!-- panel-body  -->
-                                </div>
-                                <!-- row -->
-                            </div>
-                            <!-- checkout-step-01  -->
-
-                        </div>
-                        <!-- /.checkout-steps -->
-                    </div>
-                </div>
 
 
                 <!-- /.row -->

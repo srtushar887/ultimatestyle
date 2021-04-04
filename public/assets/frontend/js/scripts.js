@@ -214,20 +214,6 @@ jQuery(".sidebar-carousel").owlCarousel({
     navigationText: ["", ""]
 });
 
-jQuery(".testimonial-area").owlCarousel({
-    items : 1,
-    itemsTablet:[768,2],
-    itemsDesktopSmall :[979,2],
-    itemsDesktop : [1199,1],
-    navigation : true,
-    slideSpeed : 300,
-    pagination: false,
-    paginationSpeed : 400,
-    navigationText: ["<i class='fas fa-angle-left'></i>", "<i class='fas fa-angle-right'></i>"],
-    autoplay: true,
-    loop: true,
-});
-
 jQuery(".brand-slider").owlCarousel({
     items : 6,
     navigation : true,

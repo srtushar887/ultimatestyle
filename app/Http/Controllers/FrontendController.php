@@ -15,6 +15,7 @@ use App\product;
 use App\product_color;
 use App\product_review;
 use App\product_size;
+use App\size;
 use App\static_section;
 use App\testimonial;
 use App\top_level_category;
@@ -239,16 +240,20 @@ class FrontendController extends Controller
 
         $product = product::where('id',$request->product_id)->first();
 
+        $final_am = ($request->quantity *  $request->product_total_amount);
+
         $data['qty'] = $request->quantity;
         $data['id'] = $product->id;
         $data['name'] = $product->product_name;
-        $data['price'] = $product->current_price;
+        $data['price'] = $final_am;
         $data['weight'] = 550;
         $data['options']['image'] = $product->main_image;
         $data['options']['size'] = $request->color;
         $data['options']['color'] = $request->size;
         $data['options']['dmimday'] = $product->min_del_date;
         $data['options']['dmaxday'] = $product->max_del_date;
+        $data['options']['coriertype'] = $request->coriertype;
+        $data['options']['received_email'] = $request->received_email;
 
         Cart::add($data);
         return back()->with('success','Product Cart Added Successfully');
@@ -303,6 +308,54 @@ class FrontendController extends Controller
         return view('frontend.searchProduct',compact('search','products','top_cats','mid_cats','end_cats','brands'));
 
     }
+
+
+    public function product_size_amount_get(Request $request)
+    {
+        $size_amount = size::where('id',$request->sizeid_one)->first();
+        return $size_amount;
+    }
+
+
+    public function shipping_policy()
+    {
+        $about = static_section::first();
+        return view('frontend.shippingPolicy',compact('about'));
+    }
+
+    public function return_policy()
+    {
+        $about = static_section::first();
+        return view('frontend.returnPolicy',compact('about'));
+    }
+
+
+    public function view_cart()
+    {
+        return view('frontend.viewCart');
+    }
+
+    public function cart_item_remove($id)
+    {
+        Cart::remove($id);
+        return back()->with('success','Cart Item Successfully Removed');
+    }
+
+    public function cart_item_update(Request $request)
+    {
+        $cart_id = $request->cart_id;
+        for($i=0;$i<count($cart_id);$i++){
+            $qt = $request->qty[$i];
+            $id = $request->cart_id[$i];
+            Cart::update($id, $qt);
+        }
+
+        return back()->with('success','Cart Successfully Updated');
+    }
+
+
+
+
 
 
 }

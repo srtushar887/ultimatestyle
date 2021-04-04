@@ -33,6 +33,8 @@
                                             Approved
                                         @elseif($order->status == 3)
                                             Delivered
+                                        @elseif($order->status == 4)
+                                            Rejected
                                         @else
                                             Not Set
                                         @endif

@@ -92,7 +92,7 @@
                                                         <input type="hidden" class="form-control" name="icon_edit" value="{{$icon->id}}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Icon <a href="">Get Icons</a></label>
+                                                        <label>Icon <a href="https://fontawesome.com/icons?d=gallery" target="_blank">Get Icons</a></label>
                                                         <input type="text" class="form-control" name="icon" value="{{$icon->icon}}">
                                                     </div>
                                                     <div class="form-group">
@@ -140,7 +140,7 @@
                             <input type="text" class="form-control" name="name">
                         </div>
                         <div class="form-group">
-                            <label>Icon <a href="">Get Icons</a></label>
+                            <label>Icon <a href="https://fontawesome.com/icons?d=gallery" target="_blank">Get Icons</a></label>
                             <input type="text" class="form-control" name="icon">
                         </div>
                         <div class="form-group">

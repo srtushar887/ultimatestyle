@@ -73,21 +73,25 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">Product Color (if have)</label>
-                                <select class="form-control" multiple name="color_id[]">
-                                    @foreach($color as $cl)
-                                        <option value="{{$cl->id}}">{{$cl->color_name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select multiple="multiple" size="10" name="color_id[]" title="duallistbox_demo1[]">
+                                        @foreach($color as $col)
+                                            <option value="{{$col->id}}">{{$col->color_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">Product Size (if have)</label>
-                                <select class="form-control" multiple name="size_id[]">
-                                    @foreach($size as $sz)
-                                        <option value="{{$sz->id}}">{{$sz->size_name}}</option>
-                                    @endforeach
-                                </select>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select multiple="multiple" size="10" name="size_id[]" title="duallistbox_demo2[]">
+                                        @foreach($size as $siz)
+                                            <option value="{{$siz->id}}">{{$siz->size_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="col-md-4 mb-3">
@@ -122,19 +126,23 @@
 
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Product Sort Description</label>
-                                <textarea type="text" cols="5" rows="5" name="sort_des" class="form-control" ></textarea>
+                                <textarea type="text" cols="5" rows="5" name="sort_des" id="product-sort-des" class="form-control" ></textarea>
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Product Long Description</label>
-                                <textarea type="text" cols="5" rows="5" name="description" class="form-control" ></textarea>
+                                <textarea type="text" cols="5" rows="5" name="description" id="product-long-des" class="form-control" ></textarea>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom01">Extra Description</label>
+                                <textarea type="text" cols="5" rows="5" name="extra_description" id="product-extra-des" class="form-control" ></textarea>
                             </div>
 
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">Min Delivery Date</label>
                                 <input type="number" name="min_del_date" class="form-control" >
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">Max Delivery Date</label>
                                 <input type="number" name="max_del_date" class="form-control" >
                             </div>
@@ -144,6 +152,22 @@
                                     <option value="0">select any</option>
                                     <option value="1">Publish</option>
                                     <option value="2">Un-Publish</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Size Status</label>
+                                <select class="form-control" name="size_status">
+                                    <option value="0">select any</option>
+                                    <option value="1">On</option>
+                                    <option value="2">Off</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Courier Status</label>
+                                <select class="form-control" name="curier_status">
+                                    <option value="0">select any</option>
+                                    <option value="1">On</option>
+                                    <option value="2">Off</option>
                                 </select>
                             </div>
 
@@ -158,4 +182,42 @@
         </div> <!-- end col -->
     </div>
 
+@stop
+
+@section('js')
+    <script src="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/jquery.bootstrap-duallistbox.js"></script>
+    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+    <script>
+        var demo1 = $('select[name="color_id[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'All Color',
+            selectedListLabel: 'Assign Color',
+            preserveSelectionOnMove: 'moved',
+            moveAllLabel: 'Move all',
+            removeAllLabel: 'Remove all'
+        });
+
+
+        var demo2 = $('select[name="size_id[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'All Size',
+            selectedListLabel: 'Assign Size',
+            preserveSelectionOnMove: 'moved',
+            moveAllLabel: 'Move all',
+            removeAllLabel: 'Remove all'
+        });
+
+
+        $("#demoform").submit(function() {
+            alert($('[name="practice_id[]"]').val());
+            return false;
+        });
+    </script>
+
+
+    <script>
+        CKEDITOR.replace( 'product-sort-des' );
+        CKEDITOR.replace( 'product-long-des' );
+        CKEDITOR.replace( 'product-extra-des' );
+
+    </script>
 @stop

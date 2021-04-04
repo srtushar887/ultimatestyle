@@ -32,7 +32,7 @@ class AdminFrontendController extends Controller
             $imageName = uniqid().'.'."jpg";
             $directory = 'assets/admin/images/slider/';
             $imgUrl1  = $directory.$imageName;
-            Image::make($image)->resize(380,848)->save($imgUrl1);
+            Image::make($image)->save($imgUrl1);
             $new_slider->image = $imgUrl1;
         }
 
@@ -54,7 +54,7 @@ class AdminFrontendController extends Controller
             $imageName = uniqid().'.'."jpg";
             $directory = 'assets/admin/images/slider/';
             $imgUrl1  = $directory.$imageName;
-            Image::make($image)->resize(380,848)->save($imgUrl1);
+            Image::make($image)->save($imgUrl1);
             $update_slider->image = $imgUrl1;
         }
 
@@ -85,6 +85,9 @@ class AdminFrontendController extends Controller
         $static = static_section::first();
         $static->about_us = $request->about_us;
         $static->privacy = $request->privacy;
+        $static->shipping_policy = $request->shipping_policy;
+        $static->return_policy = $request->return_policy;
+        $static->checkout_condition = $request->checkout_condition;
         $static->terms = $request->terms;
         $static->save();
 

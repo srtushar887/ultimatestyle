@@ -9,6 +9,8 @@ use App\product;
 use App\User;
 use App\user_order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller

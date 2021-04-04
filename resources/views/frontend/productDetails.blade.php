@@ -31,14 +31,14 @@
                                     <div id="owl-single-product">
                                         <div class="single-product-gallery-item" id="slide1">
                                             <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->main_image)}}">
-                                                <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->main_image)}}" style="height: 350px;"/>
+                                                <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->main_image)}}" style="height: 350px;width: 100%"/>
                                             </a>
                                         </div>
                                         <!-- /.single-product-gallery-item -->
                                         @if (!empty($product->image_one) && file_exists($product->image_one))
                                             <div class="single-product-gallery-item" id="slide2">
                                                 <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->image_one)}}">
-                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_one)}}" style="height: 350px;"/>
+                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_one)}}" style="height: 350px;width: 100%"/>
                                                 </a>
                                             </div>
                                         @endif
@@ -47,7 +47,7 @@
                                         <!-- /.single-product-gallery-item -->
                                             <div class="single-product-gallery-item" id="slide3">
                                                 <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->image_two)}}">
-                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_two)}}" style="height: 350px;" />
+                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_two)}}" style="height: 350px;width: 100%" />
                                                 </a>
                                             </div>
                                         @endif
@@ -56,7 +56,7 @@
                                         <!-- /.single-product-gallery-item -->
                                             <div class="single-product-gallery-item" id="slide4">
                                                 <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->image_three)}}">
-                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_three)}}" style="height: 350px;"/>
+                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_three)}}" style="height: 350px;width: 100%"/>
                                                 </a>
                                             </div>
                                         @endif
@@ -65,7 +65,7 @@
                                         <!-- /.single-product-gallery-item -->
                                             <div class="single-product-gallery-item" id="slide5">
                                                 <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->image_four)}}">
-                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_four)}}" style="height: 350px;"/>
+                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_four)}}" style="height: 350px;width: 100%"/>
                                                 </a>
                                             </div>
                                         @endif
@@ -74,7 +74,7 @@
                                         <!-- /.single-product-gallery-item -->
                                             <div class="single-product-gallery-item" id="slide6">
                                                 <a data-lightbox="image-1" data-title="Gallery" href="{{asset($product->image_five)}}">
-                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_five)}}" style="height: 350px;"/>
+                                                    <img class="img-responsive" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_five)}}" style="height: 350px;width: 100%"/>
                                                 </a>
                                             </div>
                                         @endif
@@ -86,7 +86,7 @@
                                             @if (!empty($product->main_image) && file_exists($product->main_image))
                                                 <div class="item">
                                                     <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->main_image)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->main_image)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
@@ -94,7 +94,7 @@
                                             @if (!empty($product->image_one) && file_exists($product->image_one))
                                                 <div class="item">
                                                     <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide2">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_one)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_one)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
@@ -102,7 +102,7 @@
                                             @if (!empty($product->image_two) && file_exists($product->image_two))
                                                 <div class="item">
                                                     <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="3" href="#slide3">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_two)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_two)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
@@ -110,7 +110,7 @@
                                             @if (!empty($product->image_three) && file_exists($product->image_three))
                                                 <div class="item">
                                                     <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="4" href="#slide4">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_three)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_three)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
@@ -118,14 +118,14 @@
                                             @if (!empty($product->image_four) && file_exists($product->image_four))
                                                 <div class="item">
                                                     <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="5" href="#slide5">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_four)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_four)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
                                             @if (!empty($product->image_five) && file_exists($product->image_five))
                                                 <div class="item">
                                                     <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="6" href="#slide6">
-                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_five)}}" style="height: 50px;"/>
+                                                        <img class="img-responsive" width="85" alt="" src="{{asset('assets/frontend/')}}/images/blank.gif" data-echo="{{asset($product->image_five)}}" style="height: 70px;width: 100%;"/>
                                                     </a>
                                                 </div>
                                             @endif
@@ -197,12 +197,32 @@
                                     <!-- /.stock-container -->
                                     <div class="description-container m-t-20">
                                         {!! $product->sort_des !!}
+                                        <br>
+                                        {!! $product->extra_description !!}
                                     </div>
 
                                     <form action="{{route('add.to.cart.single')}}" method="post">
                                         @csrf
                                         <div class="stock-container info-container m-t-10">
                                             <div class="row">
+
+                                                @if($product->curier_status == 1)
+                                                <div class="col-sm-12">
+                                                    <div class="stock-box">
+                                                        <label>Received By</label>
+                                                        <select class="form-control cortype" name="coriertype">
+                                                            <option value="courier">Courier</option>
+                                                            <option value="email">Email</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="stock-box receemail">
+                                                            <label>Received Email</label>
+                                                            <input type="text" class="form-control " name="received_email">
+                                                        </div>
+                                                    </div>
+                                                @endif
 
                                                 <?php
                                                 $color_count = \App\product_color::where('product_id',$product->id)->count();
@@ -213,9 +233,11 @@
                                                         <div class="stock-box">
                                                             <label>Color</label>
                                                             <select class="form-control" name="color">
+                                                                <option value="0">select any</option>
                                                                 @foreach($colors as $procolor)
                                                                     <?php
-                                                                    $color = \App\color::where('id',$procolor->id)->first();
+                                                                    $color = \App\color::where('id',$procolor->color_id)->first();
+                                                                    echo $color;
                                                                     ?>
                                                                     @if ($color)
                                                                         <option value="{{$color->id}}">{{$color->color_name}}</option>
@@ -231,10 +253,11 @@
                                                     <div class="col-sm-6">
                                                         <div class="stock-box">
                                                             <label>Size</label>
-                                                            <select class="form-control" name="size">
+                                                            <select class="form-control sizeid" name="size">
+                                                                <option value="0">select any</option>
                                                                 @foreach($sizes as $prosize)
                                                                     <?php
-                                                                    $size = \App\size::where('id',$prosize->id)->first();
+                                                                    $size = \App\size::where('id',$prosize->size_id)->first();
                                                                     ?>
                                                                     @if ($size)
                                                                         <option value="{{$size->id}}">{{$size->size_name}}</option>
@@ -255,7 +278,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="price-box">
-                                                        <span class="price">{{$gn->site_currency}}.{{$product->current_price}}</span>
+                                                        <span class="price">{{$gn->site_currency}}.<span class="amount">{{$product->current_price}}</span></span>
                                                         @if (!empty($product->old_price))
                                                             <span class="price-strike">{{$gn->site_currency}}.{{$product->old_price}}</span>
                                                         @endif
@@ -276,8 +299,7 @@
                                                     <div class="cart-quantity">
                                                         <div class="quant-input">
                                                             <div class="arrows">
-                                                                <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                                                <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+
                                                             </div>
                                                             <input type="text" name="quantity" value="1">
                                                         </div>
@@ -285,6 +307,8 @@
                                                 </div>
 
                                                 <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                <input type="hidden" name="product_current_amount" class="product_current_amount" value="{{$product->current_price}}">
+                                                <input type="hidden" name="product_total_amount" class="product_total_amount" value="{{$product->current_price}}">
 
                                                 <div class="col-sm-7">
                                                     <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
@@ -308,6 +332,10 @@
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                     <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
                                     <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                    @if($product->size_status == 1)
+                                    <li><a data-toggle="tab" href="#sizeimage">Size</a></li>
+                                        @endif
+
 
                                 </ul>
                                 <!-- /.nav-tabs #product-tabs -->
@@ -326,8 +354,17 @@
                                                 <h4 class="title">Customer Reviews</h4>
                                                 <div class="reviews">
                                                     <div class="review">
-                                                        <div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
-                                                        <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
+                                                        <?php
+                                                            $product_reviews = \App\product_review::where('product_review_id',$product->id)->get();
+                                                        ?>
+                                                            @foreach($product_reviews as $preview)
+                                                        <div class="review-title">
+                                                            <span class="summary">{{$preview->name}}</span>
+                                                            <span class="date"><i class="fa fa-calendar"></i><span>{{$preview->created_at->diffForHumans()}}</span></span>
+                                                        </div>
+
+                                                        <div class="text">"{!! $preview->message !!}"</div>
+                                                            @endforeach
                                                     </div>
                                                 </div>
                                                 <!-- /.reviews -->
@@ -402,6 +439,16 @@
                                             <!-- /.product-add-review -->
                                         </div>
                                         <!-- /.product-tab -->
+                                    </div>
+
+                                    <div id="sizeimage" class="tab-pane in">
+                                        <div class="product-tab text-center">
+                                            @if (!empty($product->product_size_image) && file_exists($product->product_size_image))
+                                                <img src="{{asset($product->product_size_image)}}" style="height: 300px;width: 300px">
+                                            @else
+                                                <img src="https://www.chanchao.com.tw/images/default.jpg" style="height: 300px;width: 300px">
+                                            @endif
+                                        </div>
                                     </div>
                                     <!-- /.tab-pane -->
 
@@ -568,9 +615,23 @@
 @stop
 @section('js')
     <script>
+
         $('.newserror').hide();
+        $('.receemail').hide();
 
         $(document).ready(function (){
+
+            $('.cortype').change(function () {
+                var cuid = $(this).val();
+                if (cuid == 'email'){
+                    $('.receemail').show();
+                }else {
+                    $('.receemail').hide();
+                }
+            })
+
+
+
             $('#newssub').click(function (e){
                 e.preventDefault();
                 var em = $('.newsemail').val();
@@ -599,6 +660,46 @@
 
 
             });
+
+
+
+
+
+
+            $('.sizeid').change(function () {
+                var sizeid_one = $('.sizeid').val();
+                console.log('paisi');
+                $.ajax({
+                    type : "POST",
+                    url: "{{route('product.size.amount.get')}}",
+                    data : {
+                        '_token' : "{{csrf_token()}}",
+                        'sizeid_one' : sizeid_one,
+
+                    },
+                    success:function(data){
+                        if (data.size_price == null || data.size_price == ""){
+                            var c_am = $('.product_current_amount').val();
+                            var am = `<span class="amount">${c_am}</span>`
+                            $('.amount').empty().replaceWith(am);
+                            $('.product_total_amount').val(c_am)
+
+                        }else {
+                            var c_am = $('.product_current_amount').val();
+                            var new_am = parseInt(c_am) + parseInt(data.size_price);
+                            var am = `<span class="amount">${new_am}</span>`
+                            $('.amount').empty().replaceWith(am);
+                            $('.product_total_amount').val(new_am)
+                        }
+
+                    }
+                });
+            })
+
+
+
+
+
 
 
 

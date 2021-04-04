@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\static_section;
 use App\User;
 use App\user_order;
 use App\user_order_detail;
@@ -14,7 +15,8 @@ class UserController extends Controller
 {
     public function checkout()
     {
-        return view('user.checkout');
+        $gen = static_section::first();
+        return view('user.checkout',compact('gen'));
     }
 
     public function payment_confirm(Request $request)
@@ -49,6 +51,8 @@ class UserController extends Controller
                 $order_detais->size_id = $card->options->size;
                 $order_detais->min_del_day = $card->options->dmimday;
                 $order_detais->max_del_day = $card->options->dmaxday;
+                $order_detais->coriertype = $card->options->coriertype == null ? null : $card->options->coriertype;
+                $order_detais->received_email = $card->options->received_email == null ? null : $card->options->received_email;
                 $order_detais->save();
             }
 

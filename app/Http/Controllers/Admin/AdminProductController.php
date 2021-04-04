@@ -150,35 +150,35 @@ class AdminProductController extends Controller
         $new_product->brand_id = $request->brand_id;
         $new_product->sort_des = $request->sort_des;
         $new_product->description = $request->description;
+        $new_product->extra_description = $request->extra_description;
         $new_product->min_del_date = $request->min_del_date;
         $new_product->max_del_date = $request->max_del_date;
         $new_product->is_publish = $request->is_publish;
+        $new_product->size_status = $request->size_status;
+        $new_product->curier_status = $request->curier_status;
+        $new_product->save();
 
-
-        $frm_sizes = $request->size_id;
-        $frm_color = $request->color_id;
-
-        if ($new_product->save()){
-
-            if ($frm_color){
-                for ($i=0;$i<count($frm_color);$i++){
-                    $new_product_color = new product_color();
-                    $new_product_color->product_id = $new_product->id;
-                    $new_product_color->color_id = $frm_color[$i];
-                    $new_product_color->save();
-                }
+        $color_data = $request->color_id;
+        if ($color_data){
+            for ($i=0;$i<count($color_data);$i++){
+                $new_prc_ac = new product_color();
+                $new_prc_ac->product_id = $new_product->id;
+                $new_prc_ac->color_id = $color_data[$i];
+                $new_prc_ac->save();
             }
-
-            if ($frm_sizes){
-                for ($i=0;$i<count($frm_sizes);$i++){
-                    $new_product_size = new product_size();
-                    $new_product_size->product_id = $new_product->id;
-                    $new_product_size->size_id = $frm_sizes[$i];
-                    $new_product_size->save();
-                }
-            }
-
         }
+
+
+        $size_data = $request->size_id;
+        if ($size_data){
+            for ($i=0;$i<count($size_data);$i++){
+                $new_prc_ac = new product_size();
+                $new_prc_ac->product_id = $new_product->id;
+                $new_prc_ac->size_id = $size_data[$i];
+                $new_prc_ac->save();
+            }
+        }
+
         return back()->with('success','Product Successfully Created');
     }
 
@@ -297,66 +297,38 @@ class AdminProductController extends Controller
         $update_product->brand_id = $request->brand_id;
         $update_product->sort_des = $request->sort_des;
         $update_product->description = $request->description;
+        $update_product->extra_description = $request->extra_description;
         $update_product->min_del_date = $request->min_del_date;
         $update_product->max_del_date = $request->max_del_date;
         $update_product->is_publish = $request->is_publish;
+        $update_product->size_status = $request->size_status;
+        $update_product->curier_status = $request->curier_status;
+        $update_product->save();
 
+        $color_data = $request->color_id;
+        product_color::where('product_id',$update_product->id)->delete();
+        if (isset($color_data)){
 
-        $frm_sizes = $request->size_id;
-        $frm_color = $request->color_id;
-
-        if (empty($frm_sizes)){
-            $frm_sizes = [];
+            for ($i=0;$i<count($color_data);$i++){
+                $new_prc_ac = new product_color();
+                $new_prc_ac->product_id = $update_product->id;
+                $new_prc_ac->color_id = $color_data[$i];
+                $new_prc_ac->save();
+            }
         }
 
-        if (empty($frm_color))
-        {
-            $frm_color = [];
-        }
 
 
-        if ($update_product->save())
-        {
-            if (count($frm_sizes) > 0){
-                for ($i = 0; $i < count($frm_sizes); $i++) {
-                    $exist_sz = product_size::where('product_id', $update_product->id)->where('size_id', $frm_sizes[$i])->get();
-                    if (count($exist_sz) > 0) {
-                        foreach ($exist_sz as $exda) {
-                            $dtsz = product_size::where('id', $exda->id)->first();
-                            $dtsz->size_id = $frm_sizes[$i];
-                            $dtsz->save();
-                        }
-                    } else {
-                        $new_sz_sv = new product_size();
-                        $new_sz_sv->product_id = $update_product->id;
-                        $new_sz_sv->size_id = $frm_sizes[$i];
-                        $new_sz_sv->save();
-                    }
-                }
+        $size_data = $request->size_id;
+        product_size::where('product_id',$update_product->id)->delete();
+        if (isset($size_data)){
+
+            for ($i=0;$i<count($size_data);$i++){
+                $new_prc_ac = new product_size();
+                $new_prc_ac->product_id = $update_product->id;
+                $new_prc_ac->size_id = $size_data[$i];
+                $new_prc_ac->save();
             }
-
-
-            if (count($frm_color) > 0){
-                for ($i=0;$i<count($frm_color);$i++){
-                    $esist_color = product_color::where('product_id',$update_product->id)->where('color_id',$frm_color[$i])->get();
-                    if (count($esist_color) > 0)
-                    {
-                        foreach ($esist_color as $excil){
-                            $excldt = product_color::where('id',$excil->id)->first();
-                            $excldt->color_id = $frm_color[$i];
-                            $excldt->save();
-
-                        }
-                    }else{
-                        $sav_new_cl = new product_color();
-                        $sav_new_cl->product_id = $update_product->id;
-                        $sav_new_cl->color_id = $frm_color[$i];
-                        $sav_new_cl->save();
-                    }
-                }
-            }
-
-
         }
 
         return back()->with('success','Product Successfuly Updated');

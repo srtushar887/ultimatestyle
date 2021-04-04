@@ -75,41 +75,62 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">Product Color (if have)</label>
-                                <br>
-                                @foreach($products_colors as $pcolor)
-                                    <?php
-                                    $color_name = \App\color::where('id',$pcolor->id)->first();
-                                    ?>
-                                    @if ($color_name)
-                                        <span class="delcolordata">{{$color_name->color_name}} <i class="fas fa-trash delproductcolor" data-id="{{$color_name->id}}"></i></span>
-                                    @endif
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select multiple="multiple" size="10" name="color_id[]" title="duallistbox_demo1[]">
 
-                                @endforeach
-                                <select class="form-control" multiple name="color_id[]">
-                                    @foreach($color as $cl)
-                                        <option value="{{$cl->id}}">{{$cl->color_name}}</option>
-                                    @endforeach
-                                </select>
+                                        <?php
+                                        $old_color = array();
+                                        $product_color = \App\product_color::where('product_id',$product->id)->get();
+                                        foreach ($product_color as $pecol){
+                                            array_push($old_color,$pecol->color_id);
+                                        }
+                                        $remove_old_color = \App\color::whereNotIn('id',$old_color)->get();
+
+                                        ?>
+                                        @if(count($product_color) > 0)
+                                            @foreach($product_color as $p_color)
+                                                <?php
+                                                $pcol = \App\color::where('id',$p_color->color_id)->first();
+                                                ?>
+                                                <option value="{{$pcol->id}}" selected>{{$pcol->color_name}}</option>
+                                            @endforeach
+                                        @endif
+
+                                        @foreach($remove_old_color as $color)
+                                            <option value="{{$color->id}}">{{$color->color_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validationCustom01">Product Size (if have)</label>
-                                <br>
-                                @foreach($products_sizes as $psize)
-                                    <?php
-                                    $size_name = \App\size::where('id',$psize->id)->first();
-                                    ?>
-                                    @if ($size_name)
-                                        <span class="delsizedata">{{$size_name->size_name}} <i class="fas fa-trash delproductsize" data-id="{{$size_name->id}}"></i></span>
-                                    @endif
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select multiple="multiple" size="10" name="size_id[]" title="duallistbox_demo2[]">
 
-                                @endforeach
-                                <select class="form-control" multiple name="size_id[]">
-                                    @foreach($size as $sz)
-                                        <option value="{{$sz->id}}">{{$sz->size_name}}</option>
-                                    @endforeach
-                                </select>
+                                        <?php
+
+                                        $old_size = array();
+                                        $product_size = \App\product_size::where('product_id',$product->id)->get();
+                                        foreach ($product_size as $prsz){
+                                            array_push($old_size,$prsz->size_id);
+                                        }
+                                        $remove_old_size = \App\size::whereNotIn('id',$old_size)->get();
+
+                                        ?>
+                                        @if(count($product_size) > 0)
+                                            @foreach($product_size as $p_size)
+                                                <?php
+                                                $psize = \App\size::where('id',$p_size->size_id)->first();
+                                                ?>
+                                                <option value="{{$psize->id}}" selected>{{$psize->size_name}}</option>
+                                            @endforeach
+                                        @endif
+
+                                        @foreach($remove_old_size as $size)
+                                            <option value="{{$size->id}}">{{$size->size_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
 
@@ -191,19 +212,24 @@
 
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Product Sort Description</label>
-                                <textarea type="text" cols="5" rows="5" name="sort_des" class="form-control" >{!! $product->sort_des !!}</textarea>
+                                <textarea type="text" cols="5" rows="5" name="sort_des" id="product-sort-des" class="form-control" >{!! $product->sort_des !!}</textarea>
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Product Long Description</label>
-                                <textarea type="text" cols="5" rows="5" name="description" class="form-control" >{!! $product->description !!}</textarea>
+                                <textarea type="text" cols="5" rows="5" name="description" id="product-long-des" class="form-control" >{!! $product->description !!}</textarea>
                             </div>
 
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-12 mb-3">
+                                <label for="validationCustom01">Extra Description</label>
+                                <textarea type="text" cols="5" rows="5" name="extra_description" id="product-extra-des" class="form-control" >{!! $product->extra_description !!}</textarea>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">Min Delivery Date</label>
                                 <input type="number" name="min_del_date" class="form-control" value="{{$product->min_del_date}}">
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom01">Max Delivery Date</label>
                                 <input type="number" name="max_del_date" class="form-control" value="{{$product->max_del_date}}">
                             </div>
@@ -213,6 +239,22 @@
                                     <option value="0">select any</option>
                                     <option value="1" {{$product->is_publish == 1 ? 'selected' : ''}}>Publish</option>
                                     <option value="2" {{$product->is_publish == 2 ? 'selected' : ''}}>Un-Publish</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Size Status</label>
+                                <select class="form-control" name="size_status">
+                                    <option value="0">select any</option>
+                                    <option value="1" {{$product->size_status == 1 ? 'selected' : ''}}>On</option>
+                                    <option value="2" {{$product->size_status == 2 ? 'selected' : ''}}>Off</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom01">Courier Status</label>
+                                <select class="form-control" name="curier_status">
+                                    <option value="0">select any</option>
+                                    <option value="1" {{$product->curier_status == 1 ? 'selected' : ''}}>On</option>
+                                    <option value="2" {{$product->curier_status == 2 ? 'selected' : ''}}>Off</option>
                                 </select>
                             </div>
 
@@ -237,52 +279,39 @@
 
 @stop
 @section('js')
+    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script src="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/jquery.bootstrap-duallistbox.js"></script>
     <script>
-        $(document).ready(function (){
-
-            $('.delproductcolor').click(function (e){
-                e.preventDefault();
-
-                var id = $(this).data('id');
-                $(this).closest('.delcolordata').remove();
-
-                $.ajax({
-                    type:'post',
-                    url:'{{route('admin.delete.color.edit.data')}}',
-                    data:{
-                        '_token' : "{{csrf_token()}}",
-                        id:id
-                    },
-                    success:function(data){
-                    }
-                });
-            });
-
-
-
-            $('.delproductsize').click(function (e){
-                e.preventDefault();
-
-                var id = $(this).data('id');
-
-                console.log(id);
-
-                $(this).closest('.delsizedata').remove();
-
-                $.ajax({
-                    type:'post',
-                    url:'{{route('admin.delete.size.edit.data')}}',
-                    data:{
-                        '_token' : "{{csrf_token()}}",
-                        id:id
-                    },
-                    success:function(data){
-
-                    }
-                });
-            });
-
-
+        var demo1 = $('select[name="color_id[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'All Color',
+            selectedListLabel: 'Assign Color',
+            preserveSelectionOnMove: 'moved',
+            moveAllLabel: 'Move all',
+            removeAllLabel: 'Remove all'
         });
+
+
+        var demo2 = $('select[name="size_id[]"]').bootstrapDualListbox({
+            nonSelectedListLabel: 'All Size',
+            selectedListLabel: 'Assign Size',
+            preserveSelectionOnMove: 'moved',
+            moveAllLabel: 'Move all',
+            removeAllLabel: 'Remove all'
+        });
+
+
+        $("#demoform").submit(function() {
+            alert($('[name="practice_id[]"]').val());
+            return false;
+        });
+    </script>
+
+
+
+    <script>
+        CKEDITOR.replace( 'product-sort-des' );
+        CKEDITOR.replace( 'product-long-des' );
+        CKEDITOR.replace( 'product-extra-des' );
+
     </script>
 @stop

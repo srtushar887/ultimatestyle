@@ -12,6 +12,7 @@
 @endsection
 @section('css')
 
+@endsection
 @section('front')
 
     <div class="body-content outer-top-vs" id="top-banner-and-menu">
@@ -24,10 +25,7 @@
                             <div class="item" style="background-image: url('{{asset($slid->image)}}');">
                                 <div class="container-fluid">
                                     <div class="caption bg-color vertical-center text-left">
-                                        <div class="slider-header fadeInDown-1">{{$slid->title}}</div>
-                                        <div class="big-text fadeInDown-1"> New Collections </div>
-                                        <div class="excerpt fadeInDown-2 hidden-xs"> <span>{!! $slid->sub_title !!}</span> </div>
-                                        <div class="button-holder fadeInDown-3"> <a href="{{route('all.products')}}" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                                        <div class="excerpt fadeInDown-2 hidden-xs"> <span></span> </div>
                                     </div>
                                     <!-- /.caption -->
                                 </div>
@@ -42,50 +40,50 @@
                         </div>
                         <!-- /.owl-carousel -->
                     </div>
-                    <div class="info-boxes wow fadeInUp">
-                        <div class="info-boxes-inner">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-4 col-lg-4">
-                                    <div class="info-box">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">money back</h4>
-                                            </div>
-                                        </div>
-                                        <h6 class="text">30 Days Money Back Guarantee</h6>
-                                    </div>
-                                </div>
-                                <!-- .col -->
+{{--                    <div class="info-boxes wow fadeInUp">--}}
+{{--                        <div class="info-boxes-inner">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6 col-sm-4 col-lg-4">--}}
+{{--                                    <div class="info-box">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-xs-12">--}}
+{{--                                                <h4 class="info-box-heading green">money back</h4>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <h6 class="text">30 Days Money Back Guarantee</h6>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!-- .col -->--}}
 
-                                <div class="hidden-md col-sm-4 col-lg-4">
-                                    <div class="info-box">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">free shipping</h4>
-                                            </div>
-                                        </div>
-                                        <h6 class="text">Shipping on orders over $99</h6>
-                                    </div>
-                                </div>
-                                <!-- .col -->
+{{--                                <div class="hidden-md col-sm-4 col-lg-4">--}}
+{{--                                    <div class="info-box">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-xs-12">--}}
+{{--                                                <h4 class="info-box-heading green">free shipping</h4>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <h6 class="text">Shipping on orders over $99</h6>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!-- .col -->--}}
 
-                                <div class="col-md-6 col-sm-4 col-lg-4">
-                                    <div class="info-box">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h4 class="info-box-heading green">Special Sale</h4>
-                                            </div>
-                                        </div>
-                                        <h6 class="text">Extra $5 off on all items </h6>
-                                    </div>
-                                </div>
-                                <!-- .col -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.info-boxes-inner -->
+{{--                                <div class="col-md-6 col-sm-4 col-lg-4">--}}
+{{--                                    <div class="info-box">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-xs-12">--}}
+{{--                                                <h4 class="info-box-heading green">Special Sale</h4>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <h6 class="text">Extra $5 off on all items </h6>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!-- .col -->--}}
+{{--                            </div>--}}
+{{--                            <!-- /.row -->--}}
+{{--                        </div>--}}
+{{--                        <!-- /.info-boxes-inner -->--}}
 
-                    </div>
+{{--                    </div>--}}
                 </div>
 
             </div>
@@ -125,16 +123,22 @@
                                                     <!-- /.product-image -->
 
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a href="{{route('product.endategory',$lproduct->product_end_cat_id)}}">{{substr($lproduct->product_name,0,30)}}......</a></h3>
-                                                        <div class="rating rateit-small">
-                                                            <div class="rating">
-                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                <span class="glyphicon glyphicon-star"></span>
-                                                            </div>
-                                                        </div>
+                                                        <h3 class="name"><a href="{{route('product.details',$lproduct->product_end_cat_id)}}">{{substr($lproduct->product_name,0,30)}}......</a></h3>
+
+                                                        <?php
+
+                                                        $rating = \App\product_review::where('product_review_id',$lproduct->id)->sum('quality');
+                                                        $rating_count = \App\product_review::where('product_review_id',$lproduct->id)->count();
+                                                        $rat = ($rating * 5  ) /100;
+                                                        ?>
+                                                        @if ($rating_count > 0)
+                                                            @for ($i = 0; $i < $rat; $i++)
+                                                                <span class="fa fa-star checked"></span>
+                                                            @endfor
+                                                        @else
+                                                            No Review
+                                                        @endif
+
                                                         <div class="description"></div>
                                                         <div class="product-price">
                                                             <span class="price"> {{$gn->site_currency}}.{{$lproduct->current_price}} </span>
@@ -186,6 +190,7 @@
                     <!-- ============================================== SCROLL TABS : END ============================================== -->
 
                     <!-- ============================================== NewsLetter End============================================== -->
+                    @if($static_data->body_not_status == 1)
                     <section class="section notification featured-product outer-bottom-vs wow fadeInUp">
                         <div class=" notification-outer ">
                             <div class="container-fluid">
@@ -198,60 +203,26 @@
                                     <div class='col-md-offset-0 col-md-12'>
                                         <div class="carousel slide" data-ride="carousel" id="quote-carousel">
                                             <!-- Bottom Carousel Indicators -->
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-                                                <li data-target="#quote-carousel" data-slide-to="1"></li>
-                                                <li data-target="#quote-carousel" data-slide-to="2"></li>
-                                            </ol>
+
 
                                             <!-- Carousel Slides / Quotes -->
                                             <div class="carousel-inner">
 
                                                 <!-- Quote 1 -->
                                                 <div class="item active">
-                                                    <blockquote>
+
                                                         <div class="row">
 
                                                             <div class="col-sm-12">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa reiciendis voluptate
-                                                                    obcaecati qui.
-                                                                    Sunt, commodi totam, qui sed accusantium eligendi nobis temporibus rem voluptas illum
-                                                                    eveniet
-                                                                    doloremque maiores ullam iure?</p>
+                                                                <p><strong style="font-size: 15px;">{!! $static_data->body_not !!}</strong></p>
                                                             </div>
                                                         </div>
-                                                    </blockquote>
+
                                                 </div>
                                                 <!-- Quote 2 -->
-                                                <div class="item">
-                                                    <blockquote>
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa reiciendis voluptate
-                                                                    obcaecati qui.
-                                                                    Sunt, commodi totam, qui sed accusantium eligendi nobis temporibus rem voluptas illum
-                                                                    eveniet
-                                                                    doloremque maiores ullam iure?</p>
-                                                            </div>
-                                                        </div>
-                                                    </blockquote>
-                                                </div>
+
                                                 <!-- Quote 3 -->
-                                                <div class="item">
-                                                    <blockquote>
-                                                        <div class="row">
 
-                                                            <div class="col-sm-12">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa reiciendis voluptate
-                                                                    obcaecati qui.
-                                                                    Sunt, commodi totam, qui sed accusantium eligendi nobis temporibus rem voluptas illum
-                                                                    eveniet
-                                                                    doloremque maiores ullam iure?</p>
-
-                                                            </div>
-                                                        </div>
-                                                    </blockquote>
-                                                </div>
                                             </div>
 
                                             <!-- Carousel Buttons Next/Prev -->
@@ -264,6 +235,7 @@
                         </div>
                         <!-- /.blog-slider-container -->
                     </section>
+                    @endif
                     <!-- /.section -->
                     <!-- ============================================== NewsLetter End============================================== -->
 
@@ -272,7 +244,7 @@
                         <div class="more-info-tab clearfix ">
                             <h3 class="new-product-title pull-left">{{$tcats->top_cat_name}}</h3>
                             <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
-                                <li class="active"><a href="#all" >All</a></li>
+                                <li class="active"><a href="{{route('main.category.products',$tcats->id)}}" >View All</a></li>
                             </ul>
                             <!-- /.nav-tabs -->
                         </div>
@@ -297,15 +269,19 @@
 
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a href="{{route('product.details',$cproduct->id)}}">{{substr($cproduct->product_name,0,30)}}......</a></h3>
-                                                            <div class="rating rateit-small">
-                                                                <div class="rating">
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                </div>
-                                                            </div>
+                                                            <?php
+
+                                                            $rating = \App\product_review::where('product_review_id',$cproduct->id)->sum('quality');
+                                                            $rating_count = \App\product_review::where('product_review_id',$cproduct->id)->count();
+                                                            $rat = ($rating * 5  ) /100;
+                                                            ?>
+                                                            @if ($rating_count > 0)
+                                                                @for ($i = 0; $i < $rat; $i++)
+                                                                    <span class="fa fa-star checked"></span>
+                                                                @endfor
+                                                            @else
+                                                                No Review
+                                                            @endif
                                                             <div class="description"></div>
                                                             <div class="product-price">
                                                                 <span class="price"> {{$gn->site_currency}}.{{$cproduct->current_price}} </span>
@@ -357,7 +333,7 @@
 
                     <!-- ============================================== BLOG SLIDER ============================================== -->
                     <section class="section latest-blog outer-bottom-vs wow fadeInUp">
-                        <h3 class="section-title">latest form blog</h3>
+                        <h3 class="section-title">blog</h3>
                         <div class="blog-slider-container outer-top-xs">
                             <div class="owl-carousel blog-slider custom-carousel">
                                 @foreach($latest_blog as $blog)
@@ -369,15 +345,15 @@
                                         <div class="item">
                                             <div class="blog-post">
                                                 <div class="blog-post-image">
-                                                    <div class="image"> <a href="blog.html"><img src="{{asset($blog->blog_image)}}" style="height: 200px;" alt=""></a> </div>
+                                                    <div class="image"> <a href="{{route('blog.details',$blog->id)}}"><img src="{{asset($blog->blog_image)}}" style="height: 200px;" alt=""></a> </div>
                                                 </div>
                                                 <!-- /.blog-post-image -->
 
                                                 <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">{{$blog->blog_title}}</a></h3>
+                                                    <h3 class="name"><a href="{{route('blog.details',$blog->id)}}">{{$blog->blog_title}}</a></h3>
                                                     <span class="info">By Admin &nbsp;|&nbsp; {{date('F j, Y, g:i a',$times )}} </span>
                                                     <p class="text">{!! substr($blog->blog_des,0,300) !!}......</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a> </div>
+                                                    <a href="{{route('blog.details',$blog->id)}}" class="lnk btn btn-primary">Read more</a> </div>
                                                 <!-- /.blog-post-info -->
 
                                             </div>

@@ -38,7 +38,15 @@
             color: #fff;
         }
 
+        .checked {
+            color: orange;
+        }
+
     </style>
+
+
+    @yield('css')
+
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -58,8 +66,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-12" >
                     <div class="left">
                         <ul>
-                            <li style="color: white"><i class="fa fa-phone" style="color: white"></i> 1{{$gn->site_phone}}</li>
-                            <li style="color: white"><i class="fa fa-envelope-o" style="color: white"></i> {{$gn->site_email}}</li>
+                            <li style="color: white"><i class="fa fa-phone" style="color: white"></i> Hotline:{{$gn->site_phone}}</li>
                         </ul>
                     </div>
                 </div>
@@ -70,9 +77,14 @@
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right">
                         <div class="top-social">
-                            <a href="mailto:name@email.com"><i class="fas fa-envelope"></i> name@email.com</a>
+                            <a href="mailto:name@email.com"><i class="fas fa-envelope"></i> {{$gn->site_email}}</a>
                             <span style="color: #eee; margin-left: 5px;">|</span>
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
+                            <?php
+                            $food_iocns = \App\social_icon::all();
+                            ?>
+                            @foreach($food_iocns as $ic)
+                            <a href="{{$ic->icon_link}}" target="_blank"><i class="{{$ic->icon}}"></i></a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -90,7 +102,7 @@
     <section class="marquee-sec">
         <div class="container">
             <div>
-                <marquee class="marquee-sec-inner" style="margin-top: -5px;">
+                <marquee class="marquee-sec-inner" style="margin-top: -5px;" scrolldelay="250">
                     <p>{!! $st_data->header_not !!}</p>
                 </marquee>
             </div>
@@ -142,7 +154,7 @@
                             $sub = \Gloudemans\Shoppingcart\Facades\Cart::content()->sum('price');
                             ?>
 
-                        <li><a href="{{route('checkout')}}"><i class="fa fa-shopping-cart"></i> View Cart ({{$gn->site_currency}}.{{$sub}})</a></li>
+                        <li><a href="{{route('view.cart')}}"><i class="fa fa-shopping-cart"></i> View Cart ({{$gn->site_currency}}.{{$sub}})</a></li>
                     </ul>
                 </div>
                 @yield('search')
@@ -244,15 +256,14 @@
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
                                 <div class="media-body">
-                                    <p>12345678<br>
-                                        +(888) 456-7890
+                                    <p>{{$gn->site_phone}}
                                     </p>
                                 </div>
                             </li>
                             <li class="media">
                                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i
                                             class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                                <div class="media-body"> <span><a href="#">ultimatestylebd@gmail.com</a></span> </div>
+                                <div class="media-body"> <span><a href="#">{{$gn->site_email}}</a></span> </div>
                             </li>
                         </ul>
                     </div>
@@ -268,11 +279,8 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                            <li><a href="#" title="About us">Order History</a></li>
-                            <li><a href="#" title="faq">FAQ</a></li>
-                            <li><a href="#" title="Popular Searches">Specials</a></li>
-                            <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                            <li class="first"><a href="{{route('home')}}" title="Contact us">My Account</a></li>
+                            <li><a href="{{route('my.orders')}}" title="About us">Order History</a></li>
                         </ul>
                     </div>
                     <!-- /.module-body -->
@@ -288,11 +296,10 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a title="Your Account" href="#">Home</a></li>
-                            <li><a title="Information" href="#">About Us</a></li>
-                            <li><a title="Addresses" href="#">Products</a></li>
-                            <li><a title="Addresses" href="#">page2</a></li>
-                            <li class="last"><a title="Orders History" href="#">Contact Us</a></li>
+                            <li class="first"><a href="{{route('front')}}">Home</a></li>
+                            <li><a  href="{{route('about.us')}}">About</a></li>
+                            <li class="last"><a  href="{{route('blogs')}}">Blog</a></li>
+                            <li><a  href="{{route('contact.us')}}">Contact Us</a></li>
                         </ul>
                     </div>
                     <!-- /.module-body -->
@@ -309,10 +316,10 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                            <li><a href="#">page1</a></li>
-                            <li><a href="#">page2</a></li>
-                            <li><a href="#">Page3</a></li>
+                            <li class="first"><a href="{{route('shipping.policy')}}" title="About us">Shipping Policy</a></li>
+                            <li><a href="{{route('return.policy')}}">Return policy</a></li>
+                            <li><a href="{{route('privacy.policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{route('terms.condition')}}">Terms & Conditions</a></li>
                         </ul>
                     </div>
                     <!-- /.module-body -->
@@ -322,26 +329,21 @@
     </div>
     <div class="copyright-bar">
         <div class="container">
-            <div class="col-xs-12 col-sm-3 no-padding social single-copyright-item">
-                <ul class="link">
-                    <li class="" style="width: 10px;"><a target="_blank" rel="" href="https://www.facebook.com/"
-                                                         title="Facebook"><i class="fa fa-facebook"></i> </a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 text-center single-copyright-item">
+            <div class="col-xs-6 col-sm-6 text-center single-copyright-item">
                 <div class="footer-copyright">
-                    <p style="color: #aaa; margin-top: 8px;">Copyright @ 2018-2020 <span
-                            style="color: #e40046; font-weight: 600;">ultimatestylebd.com</span>. All Rights Reserved</p>
+                    <?php
+                        $date = \Carbon\Carbon::now()->format('Y');
+                    ?>
+                    <p style="color: #aaa; margin-top: 60px;">Copyright @ 2018-{{$date}} <span
+                            style="color: #e40046; font-weight: 600;">ultimatestyle.com.bd</span>. All Rights Reserved</p>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-3 no-padding single-copyright-item">
-                <div class="clearfix payment-methods">
-                    <ul>
-                        <li><img src="http://ultimatestyle.com.bd/{{asset('assets/front/')}}/frontend/images/payments/1.png" alt=""></li>
-                    </ul>
+            <div class="col-xs-6 col-sm-6 text-center single-copyright-item">
+                <div class="footer-copyright">
+                    <img style="width:300px;height:auto;" src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-05.png" />
                 </div>
-                <!-- /.payment-methods -->
             </div>
+
         </div>
     </div>
 
@@ -353,19 +355,25 @@
 <!-- JavaScripts placed at the end of the document so the pages load faster -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/bootstrap-hover-dropdown.min.js"></script>
-<script src="{{asset('assets/front/')}}/smartmenus-1.1.1/jquery.smartmenus.js"></script>
-<script src="{{asset('assets/front/')}}/smartmenus-1.1.1/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>
-<script src="{{asset('assets/front/')}}/js/owl.carousel.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/echo.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/jquery.easing-1.3.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/bootstrap-slider.min.js"></script>
-<script type="text/javascript" src="{{asset('assets/front/')}}/js/lightbox.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/bootstrap-select.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/wow.min.js"></script>
-<script src="{{asset('assets/front/')}}/js/scripts.js"></script>
+<script src="{{asset('assets/front')}}/js/bootstrap.min.js"></script>
+<script src="{{asset('assets/front')}}/js/bootstrap-hover-dropdown.min.js"></script>
+<script src="{{asset('assets/front')}}/smartmenus-1.1.1/jquery.smartmenus.js"></script>
+<script src="{{asset('assets/front')}}/smartmenus-1.1.1/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>
+<script src="{{asset('assets/front')}}/js/owl.carousel.min.js"></script>
+<script src="{{asset('assets/front')}}/js/echo.min.js"></script>
+<script src="{{asset('assets/front')}}/js/jquery.easing-1.3.min.js"></script>
+<script src="{{asset('assets/front')}}/js/bootstrap-slider.min.js"></script>
+<script type="text/javascript" src="{{asset('assets/front')}}/js/lightbox.min.js"></script>
+<script src="{{asset('assets/front')}}/js/bootstrap-select.min.js"></script>
+<script src="{{asset('assets/front')}}/js/wow.min.js"></script>
+<script src="{{asset('assets/front')}}/js/scripts.js"></script>
 <!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/35aac4d297.js" crossorigin="anonymous"></script>
+<!-- Font Awesome -->
+
+@yield('js')
+
+
 <script src="https://kit.fontawesome.com/35aac4d297.js" crossorigin="anonymous"></script>
 
 

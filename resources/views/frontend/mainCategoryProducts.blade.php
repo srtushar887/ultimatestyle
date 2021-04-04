@@ -18,8 +18,11 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="home.html">Home</a></li>
-                    <li class='active'>category</li>
+                    <li><a href="{{route('front')}}">Home</a></li>
+                    <?php
+                        $mcat_data = \App\top_level_category::where('id',$cat_id)->first();
+                    ?>
+                    <li class='active'>{{$mcat_data->top_cat_name}}  </li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -122,7 +125,20 @@
 
                                                     <div class="product-info text-left">
                                                         <h3 class="name"><a href="{{route('product.details',$pro->id)}}">{{substr($pro->product_name,0,30)}}......</a></h3>
-                                                        <div class="rating rateit-small"></div>
+
+                                                        <?php
+
+                                                        $rating = \App\product_review::where('product_review_id',$pro->id)->sum('quality');
+                                                        $rating_count = \App\product_review::where('product_review_id',$pro->id)->count();
+                                                        $rat = ($rating * 5  ) /100;
+                                                        ?>
+                                                        @if ($rating_count > 0)
+                                                            @for ($i = 0; $i < $rat; $i++)
+                                                                <span class="fa fa-star checked"></span>
+                                                            @endfor
+                                                        @else
+                                                            No Review
+                                                        @endif
                                                         <div class="description"></div>
                                                         <div class="product-price">
                                                             <span class="price"> {{$gn->site_currency}}.{{$pro->current_price}} </span>

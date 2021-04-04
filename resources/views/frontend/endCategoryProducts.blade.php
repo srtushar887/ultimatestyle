@@ -18,8 +18,13 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="home.html">Home</a></li>
-                    <li class='active'>category</li>
+                    <li><a href="{{route('front')}}">Home</a></li>
+                    <?php
+                    $endcat_name = \App\end_level_category::where('id',$cat_id)->first();
+                    $midd_ct = \App\mid_level_category::where('id',$endcat_name->mid_cat_id)->first();
+                    $main_ct = \App\top_level_category::where('id',$midd_ct->top_cat_id)->first();
+                    ?>
+                    <li class='active'>{{$main_ct->top_cat_name}} / {{$midd_ct->mid_cat_name}} / {{$endcat_name->end_cat_name}}</li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -120,7 +125,19 @@
 
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a href="{{route('product.details',$pro->id)}}">{{substr($pro->product_name,0,30)}}......</a></h3>
-                                                            <div class="rating rateit-small"></div>
+                                                            <?php
+
+                                                            $rating = \App\product_review::where('product_review_id',$pro->id)->sum('quality');
+                                                            $rating_count = \App\product_review::where('product_review_id',$pro->id)->count();
+                                                            $rat = ($rating * 5  ) /100;
+                                                            ?>
+                                                            @if ($rating_count > 0)
+                                                                @for ($i = 0; $i < $rat; $i++)
+                                                                    <span class="fa fa-star checked"></span>
+                                                                @endfor
+                                                            @else
+                                                                No Review
+                                                            @endif
                                                             <div class="description"></div>
                                                             <div class="product-price">
                                                                 <span class="price"> {{$gn->site_currency}}.{{$pro->current_price}} </span>
@@ -131,7 +148,11 @@
                                                                 <br>
                                                                 <a href="{{route('product.details',$pro->id)}}">
 
-                                                                    <button class="btn btn-primary btn-block " type="button"><i class="fa fa-eye"></i> View Details</button>
+                                                                    <br>
+                                                                    <a href="{{route('product.details',$pro->id)}}">
+
+                                                                        <button class="btn btn-primary btn-block " type="button"><i class="fa fa-eye"></i> View Details</button>
+                                                                    </a>
                                                                 </a>
                                                             </div>
 
@@ -139,15 +160,7 @@
 
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
-                                                            <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="lnk wishlist" style="margin: 0 auto;margin-left: 40px;"> <a class="add-to-cart" href="{{route('product.details',$pro->id)}}" title="view"> <i class="fas fa-eye" aria-hidden="true"></i> </a> </li>
 
-                                                                </ul>
-                                                            </div>
-                                                            <!-- /.action -->
-                                                        </div>
                                                         <!-- /.cart -->
                                                     </div>
                                                     <!-- /.product -->

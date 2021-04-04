@@ -101,13 +101,6 @@
                                     </div>
                                 </form>
                             </div>
-                            @if ($static_data->add_two_status == 1)
-                                <a href="{{$static_data->add_two_link}}" target="_blank">
-                                    <div class="home-banner outer-top-n outer-bottom-xs">
-                                        <img src="{{asset($static_data->add_image_two)}}" alt="Image">
-                                    </div>
-                                </a>
-                        @endif
                             <!-- ==============================================CATEGORY============================================== -->
                             <div class="sidebar-widget outer-bottom-xs wow fadeInUp">
                                 <h3 class="section-title">Category</h3>
